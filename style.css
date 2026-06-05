@@ -1,0 +1,23 @@
+#slidev-goto-dialog .autocomplete-list {
+  display: none;
+}
+
+#slidev-goto-dialog:not(.-top-20) .autocomplete-list {
+  display: block;
+}
+
+h1 {
+  /* 2. The balanced gradient colors */
+  background-image: linear-gradient(135deg, #2ea381 0%, #a45cb8 100%);
+  
+  /* 3. THE FIX: Shrink-wraps the gradient to the text without breaking Slidev's centering */
+  display: inline-block;
+  
+  /* 4. The clipping mask */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  
+  /* 5. Reset the margin so Slidev's layout can naturally place it */
+  margin: 0;
+}
