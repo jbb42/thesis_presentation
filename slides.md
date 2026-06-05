@@ -117,6 +117,12 @@ layout: section
 
 # Cosmography
 
+---
+level: 2
+---
+
+# This is a test slide
+
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
