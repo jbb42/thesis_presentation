@@ -122,6 +122,7 @@ level: 2
 ---
 
 # This is a test slide
+It does not include any physics, but tests whether the GitHub implementation works.
 
 
 <!--
