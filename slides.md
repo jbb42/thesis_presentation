@@ -1,9 +1,8 @@
 ---
 # try also 'default' to start simple
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: /Euclid_Deep_Field_South_16x_zoom.jpg #https://cover.sli.dev
+
+background: /Euclid_Deep_Field_South_16x_zoom.jpg
 # some information about your slides (markdown enabled)
 title: Relativistic Effects in Inhomogeneous Cosmology
 info: |
@@ -22,6 +21,9 @@ comark: true
 duration: 35min
 # fix stuck goto menu
 # css: style.css
+
+aspectRatio: 16/9
+canvasWidth: 960
 
 hideInToc: true
 ---
@@ -51,16 +53,15 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
-layout: two-cols
-layoutClass: gap-16
+layout: default
 hideInToc: true
 ---
 
 # Table of contents
 
-<Toc text-sm minDepth="1" maxDepth="2" />
+<Toc text :columns="2" minDepth="1" maxDepth="2" />
 
-
+<!--
 <style>
 /* This catches the level-2 class Slidev generates and forces the indent */
 .slidev-toc-item.level-2, 
@@ -70,6 +71,7 @@ hideInToc: true
   opacity: 0.8; 
 }
 </style>
+-->
 
 ---
 level: 1
@@ -101,13 +103,28 @@ level: 2
 
 # Buchert equations
 
-
 ---
 level: 1
 layout: section
 ---
 
 # Simplified Silent Universes
+
+
+---
+level: 2
+---
+
+# The Simsilun equations
+Turning a complicated set of tensor equations into four coupled ODEs
+
+$$\begin{align}
+    \dot{\rho} &= -\rho \Theta\\
+    \dot{\Theta} &= -\frac{1}{3}\Theta^2 - \frac{1}{2}\kappa \rho - 6 \Sigma^2 + \Lambda\\
+    \dot{\Sigma} &= -\frac{2}{3}\Theta \Sigma + \Sigma^2 - \mathcal{W}\\
+    \dot{\mathcal{W}} &= -\Theta \mathcal{W} - \frac{1}{2}\kappa \rho \Sigma - 3 \Sigma \mathcal{W}
+\end{align}$$
+
 
 
 ---
