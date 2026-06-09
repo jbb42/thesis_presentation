@@ -7,6 +7,7 @@
 }
 
 h1 {
+  view-transition-name: morph-title;
   /* 2. The balanced gradient colors */
   background-image: linear-gradient(135deg, #2ea381 0%, #a45cb8 100%);
   
@@ -20,4 +21,60 @@ h1 {
   
   /* 5. Reset the margin so Slidev's layout can naturally place it */
   margin: 0;
+}
+
+
+
+/* --- Global Inline TOC Menu --- */
+
+/* 1. Force the main wrapper to never wrap */
+.inline-menu.slidev-toc {
+  white-space: nowrap !important;
+  width: 100% !important;
+  
+  /* This tells the browser to seamlessly track and animate this exact element across slides */
+  view-transition-name: outline-menu; 
+}
+
+/* 2. Lock the list container into a single horizontal track */
+.inline-menu.slidev-toc ul {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important; 
+  white-space: nowrap !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+/* 3. Force list items to be inline elements */
+.inline-menu.slidev-toc li {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  width: auto !important; 
+  margin: 0 !important;
+}
+
+/* 4. Turn off Slidev's hidden counters/bullets */
+.inline-menu.slidev-toc li::before {
+  display: none !important;
+}
+
+/* 5. Inject the separators with hardcoded spacing */
+.inline-menu.slidev-toc li:not(:last-child)::after {
+  content: "|" !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  opacity: 0.5 !important;
+  pointer-events: none !important;
+}
+
+/* 6. Clean up the links and apply the hover effect */
+.inline-menu.slidev-toc a {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.025em !important;
+  transition: color 0.15s ease-in-out !important;
 }
