@@ -78,3 +78,7 @@ h1 {
   letter-spacing: 0.025em !important;
   transition: color 0.15s ease-in-out !important;
 }
+
+.slidev-layout.two-columns {
+  grid-template-columns: 60% 40%;
+}

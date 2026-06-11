@@ -71,7 +71,7 @@ transition: fade
 * Compare to ray tracing results in LTB models
 </GradientBox>
 
-<div class="absolute right-10 top-7 w-66">
+<div class="absolute right-10 top-6 w-66">
   <Toc text :columns="1" minDepth="1" maxDepth="2" />
 </div>
 
@@ -83,24 +83,12 @@ transition: fade
   padding-left: 0rem !important;
 }
 
-/* 2. Style the top-level main sections (Bold + Spacing) */
-:deep(.slidev-toc > ul > li),
-:deep(.slidev-toc > ol > li) {
-  margin-bottom: 0rem !important; /* Huge gap between main sections */
-}
 :deep(.slidev-toc > ul > li a),
 :deep(.slidev-toc > ol > li a) {
   font-weight: 800 !important; /* True bold */
   font-size: 1rem !important;
 }
 
-/* 3. Style the nested sub-sections (Normal weight + Indented) */
-:deep(.slidev-toc li li) {
-  margin-left: 1rem !important;
-  margin-top: -0.3rem !important;
-  margin-bottom: -0.3rem !important;
-  list-style-type: circle !important; /* Hollow circle bullets for sub-items */
-}
 :deep(.slidev-toc li li a) {
   font-weight: 400 !important; /* Standard, un-bolded weight */
   font-size: 1rem !important;
@@ -120,44 +108,140 @@ layout: section
 
 ---
 level: 2
-routeAlias: flrw
 transition: slide-left
+layout: two-cols
 ---
 
-# FLRW Cosmology
+# FLRW cosmology
 
-Friedman and Lemaitre and Robertson and Walker
+<span></span>
+
+Using general relativity to solve the Universe
+
+$$ R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} + \Lambda g_{\mu\nu} = \kappa T_{\mu\nu} $$
+
+<v-click>
+Assuming homogeneity and isotropy gives us FLRW metric
+
+$$ \mathrm{d} s^2 = -\mathrm{d} t^2 + a(t)^2 \bigg( \frac{1}{1-kr^2} \mathrm{d} r^2 + r^2 \mathrm{d} \Omega^2 \bigg)  $$
+</v-click>
+
+<v-click>
+Friedmann equtions describe dynamics of the entire Universe
+
+$$ \begin{align*}
+\frac{\dot{a}^2}{a^2} &\equiv H^2 = \frac{\kappa}{3} \rho - \frac{k}{a^2} + \frac{\Lambda}{3} \\
+\frac{\mathrm{d}ot{a}}{a} &= -\frac{\kappa}{6} (\rho+3p) + \frac{\Lambda}{3} 
+\end{align*}
+$$
+
+Flat universe with accelerating expansion --- $\Lambda$CDM model
+</v-click>
+
+
+
+::right::
+
+<v-click>
+  <RaisinBun />
+</v-click>
+
 
 ---
 level: 2
-routeAlias: lcdm
-transition: slide-left
----
-
-# ΛCDM model
-
-Standard dark energy and cold dark matter paradigm
-
-
----
-level: 2
-routeAlias: buchert
 transition: slide-left
 ---
 
 # Buchert equations
 
+<span></span>
+
+Large-scale effects from small-scale inhomogeneities?
+
 <v-click>
+Spatial averages and time derivatives does not commute. Averaging local equations:
+
+$$
+\begin{align*}
+    3\frac{\dot{a}_\mathcal{D}^2}{a_\mathcal{D}^2} &= 3H_\mathcal{D}^2 = - \frac{1}{2} \langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D} + \kappa \langle\rho\rangle_\mathcal{D} + \Lambda - \frac{1}{2} Q_\mathcal{D}\\
+    3\frac{\ddot{a}_\mathcal{D}}{a_\mathcal{D}} &= Q_\mathcal{D} - \frac{\kappa}{2}\langle \rho \rangle_\mathcal{D} + \Lambda\\
+    Q_\mathcal{D} &= \frac{2}{3}\big(\langle \Theta^2 \rangle_\mathcal{D} - \langle \Theta \rangle_\mathcal{D}^2\big)  - 2\langle \sigma^2 \rangle_\mathcal{D}
+\end{align*}
+$$
+</v-click>
+
+<v-click>
+
+Kinematical backreaction $Q_\mathcal{D}$ and non-zero average curvature $\langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}$ changes cosmological dynamics.
+Accelerating cosmological expansion without local accelerating expansion anywhere.
+
+</v-click>
+
+<v-click>
+<div class="flex justify-center items-center gap-8 text-xl">
+  <div class="text-blue-500">
+    <span class="font-bold">Blue team (voids):</span> 20 km/h
+  </div>
+  
+  
+  <div class="text-red-500">
+    <span class="font-bold">Red team (overdensities):</span> 10 km/h
+  </div>
+</div>
   <CyclistRace />
 </v-click>
 
+
 ---
 level: 2
-routeAlias: ltb
 transition: fade
+layout: two-cols
 ---
 
 # LTB models
+
+<span></span>
+
+Lemaître--Tolman--Bondi (LTB) models
+
+<v-click>
+
+Inhomogeneous and spherically symmetric exact solutions
+
+$$\mathrm{d} s^2 = -\mathrm{d} t^2 + \frac{A'(t, r)^2}{1-k(r)} \mathrm{d} r^2 + A(t, r)^2 \mathrm{d} \Omega^2 $$
+
+</v-click>
+
+<v-click>
+
+Void surrounded by overdensity
+
+</v-click>
+
+<v-click>
+
+We can derive $\Theta$ and $\sigma^2$
+
+$$
+\Theta = \frac{\dot{A}'}{A'} + 2\frac{\dot{A}}{A}\,,\quad
+\sigma^2 = \frac{1}{3} \bigg( \frac{\dot{A}'}{A'} - \frac{\dot{A}}{A} \bigg)^2 
+$$
+
+</v-click>
+
+<v-click>
+
+Difficult to produce significant backreaction <ArXiv id="1308.6731" />
+
+</v-click>
+
+::right::
+
+### INSERT DENSITY LTB PLOT
+<div class="h-full flex items-center justify-center" v-click="2">
+  <img src="/frontpic.png" />
+</div>
+
 
 ---
 level: 1
@@ -169,19 +253,102 @@ layout: section
 
 ---
 level: 2
-transition: slide-left
+transition: view-transition
 ---
 
 # The Simsilun equations
-Turning a complicated set of tensor equations into four coupled ODEs
+Motivation and derivation
 
-$$\begin{align}
+
+Cosmological simulations are approximations of the Universe
+
+
+<v-click>
+N-body simulations successfully produce structures, but require periodic boundary conditions
+
+</v-click>
+
+<v-click>
+
+Simplified silent universe (Simsilun) as a numerical approach without PBCs <ArXiv id="1708.09143" />
+
+</v-click>
+
+<v-click>
+
+Starting with general fluid decription:
+
+$$
+\begin{align*}
+  \dot{\rho} &= - (\rho + p)\Theta - \pi^{\mu\nu} \sigma_{\mu\nu} - q^{\nu}{}_{;\nu} -  q^\mu A_\mu\\
+  \dot{\Theta} &= A_\mu A^\mu + \mathrm{D}_\mu A^\mu - 2(\sigma^2 -\omega^2) - \frac{1}{3}\Theta^2 - \frac{\kappa}{2}(\rho + 3 p) + \Lambda \\
+  \dot{\sigma}_{\langle\mu\nu\rangle} &= A_{\langle\mu} A_{\rangle\nu}
+    + \mathrm{D}_{\langle\mu}A_{\nu\rangle} - \sigma_{\langle\mu|\rho}\sigma^\rho{}_{\nu\rangle} - \omega_{\langle\mu} \omega_{\nu\rangle} 
+    - \frac{2}{3}\Theta\sigma_{\mu\nu} -E_{\mu\nu} + \frac{\kappa}{2}\pi_{\mu\nu} \\
+    \dot{E}_{\langle\mu\nu\rangle} &= -\Theta E_{\mu\nu} + \mathrm{curl}\, H_{\mu\nu} - \frac{\kappa}{2} (\rho + p) \sigma_{\mu\nu} - \frac{\kappa}{2} \dot{\pi}_{\mu\nu} - \frac{\kappa}{6} \Theta \pi_{\mu\nu} + 3 \sigma_{\langle\mu}{}^\alpha \left( E_{\nu\rangle\alpha} - \frac{\kappa}{6} \pi_{\nu\rangle\alpha} \right)
+\end{align*}
+$$
+
+Complicated set of tensor equations
+
+</v-click>
+
+---
+level: 3
+transition: view-transition
+---
+
+# The Simsilun equations
+Silencing the Universe
+
+Assuming irrotational pressureless dust and vanishing magnetic Weyl tensor:
+
+$$
+    \omega_{\mu\nu} = 0\,,\quad
+    A_\mu = 0\,,\quad
+    q_\mu = 0\,,\quad
+    p = 0\,,\quad
+    \pi_{\mu\nu} = 0\,,\quad
+    H_{\mu\nu} = 0
+$$
+
+<v-click>
+
+Using $\sigma_{\mu\nu} = \Sigma e_{\mu\nu}$ and $E_{\mu\nu} = \mathcal{W} e_{\mu\nu}$ yields five scalar differential equations
+
+$$\begin{align*}
     \dot{\rho} &= -\rho \Theta\\
     \dot{\Theta} &= -\frac{1}{3}\Theta^2 - \frac{1}{2}\kappa \rho - 6 \Sigma^2 + \Lambda\\
     \dot{\Sigma} &= -\frac{2}{3}\Theta \Sigma + \Sigma^2 - \mathcal{W}\\
-    \dot{\mathcal{W}} &= -\Theta \mathcal{W} - \frac{1}{2}\kappa \rho \Sigma - 3 \Sigma \mathcal{W}
-\end{align}$$
+    \dot{\mathcal{W}} &= -\Theta \mathcal{W} - \frac{1}{2}\kappa \rho \Sigma - 3 \Sigma \mathcal{W}\\
+    \dot{V} &= \Theta V
+\end{align*}$$
 
+Solve for each cell to simulate universe
+
+</v-click>
+
+---
+level: 3
+transition: slide-left
+layout: two-cols
+---
+
+# The Simsilun equations
+Simplifying initial conditons
+
+
+::right::
+### INSERT LTB COMPARISON
+<div class="h-full flex items-center justify-center" v-click="1">
+  <img src="/frontpic.png" />
+</div>
+
+<style>
+.slidev-layout.two-columns {
+  grid-template-columns: 60% 40%;
+}
+</style>
 
 ---
 level: 2
@@ -193,11 +360,19 @@ transition: slide-left
 
 ---
 level: 2
+transition: view-transition
+---
+
+# Training CNNs
+CNN architecture
+
+---
+level: 3
 transition: fade
 ---
 
 # Training CNNs
-
+CNN results
 
 ---
 level: 1
@@ -208,10 +383,19 @@ layout: section
 
 ---
 level: 2
+transition: view-transition
+---
+
+# Theory
+Ray tracing
+
+---
+level: 3
 transition: slide-left
 ---
 
 # Theory
+Cosmographic expansion
 
 ---
 level: 2
@@ -252,9 +436,10 @@ transition: fade
 
 ---
 layout: end
+level: 3
 ---
 
-# Questions?
+# Thank you for listening! Questions?
 
 
 <!--
