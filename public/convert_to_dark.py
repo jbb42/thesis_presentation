@@ -3,11 +3,12 @@ import re
 import glob
 
 def batch_convert_svgs(folder_path=".", bg_color="#121212"):
-    search_pattern = os.path.join(folder_path, "*.svg")
-    svg_files = glob.glob(search_pattern)
+    # --- THE FIX: Use recursive globbing to find SVGs in all subfolders ---
+    search_pattern = os.path.join(folder_path, "**", "*.svg")
+    svg_files = glob.glob(search_pattern, recursive=True)
     
     if not svg_files:
-        print("No SVG files found in the directory.")
+        print("No SVG files found in the directory or its subfolders.")
         return
 
     for file_path in svg_files:
@@ -37,7 +38,6 @@ def batch_convert_svgs(folder_path=".", bg_color="#121212"):
         content = content.replace('TEMP_SWAP', '#ffffff')
 
         # 4. Inject native SVG styles right before the closing tag to catch "naked" text paths
-        # NOTE: Removed the path stroke rule so text isn't artificially bolded!
         native_style = """
 <style>
   path:not([fill]), g:not([fill]), text:not([fill]) { fill: #ffffff !important; }
@@ -47,15 +47,16 @@ def batch_convert_svgs(folder_path=".", bg_color="#121212"):
         # Replace the closing tag safely (case-insensitive)
         content = re.sub(r'(?i)</svg>', native_style, content)
 
-        # Create the new filename (e.g., cnn.svg -> cnn_dark.svg)
+        # Create the new filename (keeps the subfolder structure intact!)
         output_path = file_path.replace(".svg", "_dark.svg")
         
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(content)
             
-        print(f"Successfully converted: {os.path.basename(output_path)}")
+        # Prints the path relative to where you ran the script so you see the folders
+        print(f"Successfully converted: {os.path.relpath(output_path)}")
 
 if __name__ == "__main__":
-    print("Starting SVG dark mode batch conversion...")
+    print("Starting SVG dark mode batch conversion (including subfolders)...")
     batch_convert_svgs()
     print("All done!")
