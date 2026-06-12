@@ -590,12 +590,41 @@ First: Negative -> contributes to smaller d_A
 Second and third: both begative, both negligible (required much matter)
 Fourth: Initially negative (minus, theta minus and negative differential as H decreases with \lambda (increases with z) on slope towards centre), positive from centre of void, flips dramatically to negative at overdensity due to derivative chaning sign again. Zero in background due to derivative being zero.
 -->
+
 ---
 level: 2
 transition: slide-left
 ---
 
-# Fiducial rays
+
+# Fiducial ray
+
+<div class="relative h-full w-full flex items-center justify-center">
+
+  <div v-if="$slidev.nav.clicks === 0" class="grid grid-cols-2 gap-4 items-center justify-items-center h-full w-full">
+    <div class="flex flex-col items-center justify-center h-full">
+      <img src="/rho_r.svg" class="h-full w-auto object-contain dark:hidden" />
+      <img src="/rho_r_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
+    </div>
+    <div class="flex flex-col items-center justify-center h-full">
+      <img src="/rho_z.svg" class="h-full w-auto object-contain dark:hidden" />
+      <img src="/rho_z_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
+    </div>
+  </div>
+
+  <div v-click="1" v-click-hide="2" class="absolute inset-0 w-full h-full">
+    <div class="absolute right-0 bottom-0 w-full h-[70vh] flex items-end justify-end p-6">
+      <img src="/fiducial_vs_expansion.svg" class="w-full h-auto max-h-full object-contain dark:hidden" />
+      <img src="/fiducial_vs_expansion_dark.svg" class="w-full h-auto max-h-full object-contain hidden dark:block" />
+    </div>
+  </div>
+
+  <div v-click="2" class="absolute inset-0 flex items-center justify-center">
+    <img src="/dA_zz_terms.svg" class="h-full w-auto object-contain dark:hidden" />
+    <img src="/dA_zz_terms_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
+  </div>
+
+</div>
 
 ---
 level: 2
