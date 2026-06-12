@@ -45,7 +45,7 @@ Examining the inhomogeneous universe through simulations, machine learning, and 
   CP3-Origins <br>
   University of Southern Denmark
  <br><br>
- Supervised by<span class="font-bold"> Sofie Marie Koksbang</span>
+ Supervised by <span class="font-bold">Sofie Marie Koksbang</span>
 </div>
 
 </div>
@@ -127,11 +127,11 @@ $$ \mathrm{d} s^2 = -\mathrm{d} t^2 + a(t)^2 \bigg( \frac{1}{1-kr^2} \mathrm{d} 
 </v-click>
 
 <v-click>
-Friedmann equtions describe dynamics of the entire Universe
+Friedmann equations describe the dynamics of the Universe
 
 $$ \begin{align*}
 \frac{\dot{a}^2}{a^2} &\equiv H^2 = \frac{\kappa}{3} \rho - \frac{k}{a^2} + \frac{\Lambda}{3} \\
-\frac{\mathrm{d}ot{a}}{a} &= -\frac{\kappa}{6} (\rho+3p) + \frac{\Lambda}{3} 
+\frac{\ddot{a}}{a} &= -\frac{\kappa}{6} (\rho+3p) + \frac{\Lambda}{3} 
 \end{align*}
 $$
 
@@ -159,7 +159,7 @@ transition: slide-left
 Large-scale effects from small-scale inhomogeneities?
 
 <v-click>
-Spatial averages and time derivatives does not commute. Averaging local equations:
+Spatial averages and time derivatives do not commute. Averaging local equations:
 
 $$
 \begin{align*}
@@ -218,7 +218,7 @@ Void surrounded by overdensity
 
 </v-click>
 
-<v-click>
+<v-click at="3">
 
 We can derive $\Theta$ and $\sigma^2$
 
@@ -229,7 +229,7 @@ $$
 
 </v-click>
 
-<v-click>
+<v-click at="4">
 
 Difficult to produce significant backreaction <ArXiv id="1308.6731" />
 
@@ -237,11 +237,13 @@ Difficult to produce significant backreaction <ArXiv id="1308.6731" />
 
 ::right::
 
-### INSERT DENSITY LTB PLOT
-<div class="h-full flex items-center justify-center" v-click="2">
-  <img src="/frontpic.png" />
-</div>
+<div class="h-full w-[calc(100%+70px)] -ml-7 flex items-center justify-center relative">
 
+  <div v-click="2" class="absolute inset-0 flex items-center justify-center">
+    <img src="/rho_r.svg" class="w-full h-auto dark:hidden" />
+    <img src="/rho_r_dark.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+</div>
 
 ---
 level: 1
@@ -276,7 +278,7 @@ Simplified silent universe (Simsilun) as a numerical approach without PBCs <ArXi
 
 <v-click>
 
-Starting with general fluid decription:
+Starting with general fluid description:
 
 $$
 \begin{align*}
@@ -288,8 +290,6 @@ $$
     \dot{E}_{\langle\mu\nu\rangle} &= -\Theta E_{\mu\nu} + \mathrm{curl}\, H_{\mu\nu} - \frac{\kappa}{2} (\rho + p) \sigma_{\mu\nu} - \frac{\kappa}{2} \dot{\pi}_{\mu\nu} - \frac{\kappa}{6} \Theta \pi_{\mu\nu} + 3 \sigma_{\langle\mu}{}^\alpha \left( E_{\nu\rangle\alpha} - \frac{\kappa}{6} \pi_{\nu\rangle\alpha} \right)
 \end{align*}
 $$
-
-Complicated set of tensor equations
 
 </v-click>
 
@@ -324,7 +324,7 @@ $$\begin{align*}
     \dot{V} &= \Theta V
 \end{align*}$$
 
-Solve for each cell to simulate universe
+Solve for each cell to simulate universes
 
 </v-click>
 
@@ -335,28 +335,106 @@ layout: two-cols
 ---
 
 # The Simsilun equations
-Simplifying initial conditons
+Simplifying initial conditions
+
+
+Perturbation theory using density contrast $\delta$
+
+$$
+\begin{align*}
+    \rho_i &= \bar{\rho}(1 + \delta_i) \\
+    \Theta_i &= \bar{\Theta}\bigg(1 - \frac{1}{3}\delta_i\bigg) \\
+    \Sigma_i &= \frac{1}{9}\bar{\Theta} \delta_i \\
+    \mathcal{W}_i &= -\frac{\kappa}{6}\bar{\rho} \delta_i\\
+    V_i &= \frac{1}{1+\delta_i}
+\end{align*}
+$$
+
+
+<v-click>
+
+Compare with LTB model
+
+</v-click>
+
+<v-click at="6">
+
+$\delta_i$ generated with CLASS <ArXiv id="1104.2933"/>
+
+</v-click>
 
 
 ::right::
-### INSERT LTB COMPARISON
-<div class="h-full flex items-center justify-center" v-click="1">
+
+<div class="h-full w-[calc(100%+70px)] -ml-7 flex items-center justify-center relative">
+
+  <div v-click class="absolute inset-0 flex items-center justify-center">
+    <img src="/density_LTB.svg" class="w-full h-auto dark:hidden" />
+    <img src="/density_LTB_dark.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+
+  <div v-click class="absolute inset-0 flex items-center justify-center">
+    <img src="/expansion_LTB.svg" class="w-full h-auto dark:hidden" />
+    <img src="/expansion_LTB_dark.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+
+  <div v-click class="absolute inset-0 flex items-center justify-center">
+    <img src="/shear_LTB.svg" class="w-full h-auto dark:hidden" />
+    <img src="/shear_LTB_dark.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+
+  <div v-click class="absolute inset-0 flex items-center justify-center">
+    <img src="/weyl_LTB.svg" class="w-full h-auto dark:hidden" />
+    <img src="/weyl_LTB_dark.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+
+</div>
+
+<style>
+.slidev-layout.two-columns {
+  grid-template-columns: 45% 55%;
+}
+</style>
+
+
+
+---
+level: 2
+transition: slide-left
+layout: two-cols
+---
+
+# The simulations
+
+<span></span>
+
+Simulating universes numerically by solving Simsilun ODEs until $H=H_0$
+
+<v-click>
+
+|            | N = 64       | N = 128      |
+| ---------- | -------------- | -------------- |
+| $\Omega_m$ | [0.20, 0.40] | [0.20, 0.40] |
+| $\Omega_\Lambda$|[0.60, 0.80]|[0.60, 0.80]|
+| $h$        | [0.60, 0.80] | [0.60, 0.80] |
+| Increment  | 0.01         | 0.02         |
+| Versions   | 10           | 5            |
+| Total      | 92610        | 6655         | 
+
+</v-click>
+
+
+::right::
+### INSERT EVOLUTION TRANSFORMATION AND CORNER PLOT
+<div class="h-full flex items-center justify-center" v-click="0">
   <img src="/frontpic.png" />
 </div>
 
 <style>
 .slidev-layout.two-columns {
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 40% 60%;
 }
 </style>
-
----
-level: 2
-transition: slide-left
----
-
-# The simulations
-
 
 ---
 level: 2
@@ -364,15 +442,45 @@ transition: view-transition
 ---
 
 # Training CNNs
-CNN architecture
+Convolutional neural network architecture
+
+<div class="h-full">
+  <LightOrDark>
+    <template #light>
+      <img src="/cnn.svg" class="w-full mx-auto" alt="CNN Architecture Light" />
+    </template>
+    <template #dark>
+      <img src="/cnn_dark.svg" class="w-full mx-auto" alt="CNN Architecture Dark" />
+    </template>
+  </LightOrDark>
+</div>
+
+
 
 ---
 level: 3
 transition: fade
+layout: two-cols
 ---
 
 # Training CNNs
 CNN results
+
+Accurate predictions for CNN1
+
+Less accurate for CNN2 and CNN3
+
+Loss curve
+
+Demonstrates proof of concept
+
+More work needed to use observations
+
+<style>
+.slidev-layout.two-columns {
+  grid-template-columns: 40% 60%;
+}
+</style>
 
 ---
 level: 1
@@ -387,7 +495,53 @@ transition: view-transition
 ---
 
 # Theory
+Exploring the inhomogeneous universe from observations
+
+* **Motivation**
+  * Emerging backreaction effects alter global dynamics
+  * Investigating the inhomogeneous effects on local observations
+
+<v-click>
+
+* **Model-independent framework**
+  * Examining local effects without assuming an underlying model
+  * Looking at lensing and kinematical effects, not global backreaction
+
+</v-click>
+
+<v-click>
+
+* **Cosmographic expansion**
+  * Typically expanding around $z=0$ to, for instance, determine $H_0$ and $q_0$
+  * Extending the expansion to an arbitrary redshift $z_*$
+
+</v-click>
+
+---
+level: 3
+transition: view-transition
+---
+
+# Theory
 Ray tracing
+
+Geodesic equation and transport equation for light rays
+$$\frac{\mathrm{d} k^\mu}{\mathrm{d} \lambda} + \Gamma^\mu_{\nu\alpha} k^\nu k^\alpha = 0 \\
+\frac{\mathrm{d}^2 \xi^a}{\mathrm{d} \lambda^2} = R_{\mu\rho\nu\sigma} k^\rho k^\nu E^{a\mu} E^\sigma_b \xi^b =: T^a_b \xi^b $$
+
+Defining the optical tidal matrix
+$$
+  T_{ab} = \begin{pmatrix}
+        \mathbf{R}-\Re(\mathbf{F}) & \Im(\mathbf{F}) \\
+        \Im(\mathbf{F}) & \mathbf{R}+\Re(\mathbf{F})
+    \end{pmatrix}
+$$
+
+$$\mathbf{R} = -\frac{1}{2}R_{\mu\nu} k^\mu k^\nu\,,\quad
+\mathbf{F} = -\frac{1}{2}R_{\rho\mu\nu\alpha} (e^*)^\rho k^\mu k^\nu (e^*)^\alpha$$
+
+Using the linear relations $\xi^a = D^a_b \dot{\xi}_0^b\,$, the Jacobian evolves as $\ddot{D}^a_b = T^a_c D^c_b$
+$$d_A = \sqrt{\lvert\det{D}\rvert}$$
 
 ---
 level: 3
@@ -397,6 +551,45 @@ transition: slide-left
 # Theory
 Cosmographic expansion
 
+
+Relating redshift $z$ and affine parameter $\lambda$ through  $\frac{\mathrm{d} z}{\mathrm{d} \lambda} = -E_o\mathcal{H} (1+z)^2$ and using $\frac{\mathrm{d} d_A}{\mathrm{d} \lambda} = \frac{1}{2}\hat{\theta}d_A$:
+
+<v-click>
+
+<div class="text-15px">
+
+$$
+\begin{aligned}
+\frac{\mathrm{d} d_A}{\mathrm{d} z} &= - \frac{\hat{\theta}}{2(1+z)^2 E_o\mathcal{H}} d_A
+\\
+\frac{\mathrm{d}^2 d_A}{\mathrm{d} z^2} &= \frac{d_A}{2(1+z)^4 E_o^2 \mathcal{H}^2} \bigg[2{\hat{\theta}} E_o \mathcal{H}(1+z) - 2{\lvert\hat{\sigma}\rvert^2} - k^\mu k^\nu {R_{\mu\nu}} - \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda}  \bigg]
+\\
+\frac{\mathrm{d}^3 d_A}{\mathrm{d} z^3} &= \frac{d_A}{2(1+z)^6 E_o^3 \mathcal{H}^3} \bigg[
+    6\bigg(2 E_o \mathcal{H}{\lvert\hat{\sigma}\rvert^2} + E_o \mathcal{H} k^\mu k^\nu R_{\mu\nu} + E_o {\hat{\theta}} \frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg) (1+z) - 6 E_o^2 \mathcal{H}^2 {\hat{\theta}} (1+z)^2 -3 {\hat{\theta}} {\lvert\hat{\sigma}\rvert^2} \\
+    &\quad- \frac{3}{\mathcal{H}}\bigg({2{\lvert\hat{\sigma}\rvert^2}} + {k^\mu k^\nu R_{\mu\nu}}\bigg)\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} - \frac{3{\hat{\theta}}}{\mathcal{H}^2}\bigg(\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg)^2 + \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d}^2 \mathcal{H}}{\mathrm{d} \lambda^2} - 2 k^\alpha k^\beta C_{\rho\alpha\sigma\beta} \hat{\sigma}^{\rho\sigma} + \frac{\hat{\theta} k^\mu k^\nu R_{\mu\nu}}{2} + \frac{\mathrm{d} (k^\mu k^\nu R_{\mu\nu})}{\mathrm{d} \lambda} \bigg]
+\end{aligned}
+$$
+
+</div>
+
+</v-click>
+
+<v-click>
+
+Using these to get a Taylor expansion to third order
+
+$$d_A(z) \approx d_A(z_*) + d'_A(z_*)(z-z_*) + \frac{1}{2} d_A''(z_*)(z-z_*)^2 + \frac{1}{6}d_A'''(z_*)(z-z_*)^3$$
+
+</v-click>
+
+
+<!--
+First order term: Actually positive, since rays are converging, meaning θ is negative.
+Second order terms:
+First: Negative -> contributes to smaller d_A
+Second and third: both begative, both negligible (required much matter)
+Fourth: Initially negative (minus, theta minus and negative differential as H decreases with \lambda (increases with z) on slope towards centre), positive from centre of void, flips dramatically to negative at overdensity due to derivative chaning sign again. Zero in background due to derivative being zero.
+-->
 ---
 level: 2
 transition: slide-left
@@ -440,9 +633,3 @@ level: 3
 ---
 
 # Thank you for listening! Questions?
-
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
