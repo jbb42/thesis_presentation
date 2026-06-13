@@ -72,7 +72,7 @@ transition: fade
 * Compare to ray tracing results in LTB models
 </GradientBox>
 
-<div class="absolute right-10 top-6 w-66">
+<div class="absolute right-10 top-4 w-66">
   <Toc text :columns="1" minDepth="1" maxDepth="2" />
 </div>
 
@@ -675,8 +675,7 @@ transition: slide-left
 # Fiducial ray
 
 <div class="relative h-full w-full flex items-center justify-center">
-
-  <div class="grid grid-cols-2 gap-4 items-center justify-items-center h-full w-full">
+  <div v-show="$clicks === 0" class="grid grid-cols-2 gap-4 items-center justify-items-center h-full w-full">
     <div class="flex flex-col items-center justify-center h-full">
       <img src="/rho_r.svg" class="h-full w-auto object-contain dark:hidden" />
       <img src="/rho_r_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
@@ -687,19 +686,34 @@ transition: slide-left
     </div>
   </div>
 
-  <div v-click="1" v-if="$clicks < 2" class="absolute inset-0 w-full h-full">
-    <div class="absolute right-0 bottom-0 w-full h-[70vh] flex items-end justify-end p-6">
-      <img src="/fiducial_vs_expansion.svg" class="w-full h-auto max-h-full object-contain dark:hidden" />
-      <img src="/fiducial_vs_expansion_dark.svg" class="w-full h-auto max-h-full object-contain hidden dark:block" />
+  <span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
+  <span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
+
+<Transition name="fade">
+  <div v-if="$clicks === 1" class="absolute inset-0 flex items-end justify-end pb-4">
+    <img src="/fiducial_vs_expansion.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/fiducial_vs_expansion_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+</Transition>
+
+  <Transition name="fade">
+    <div v-if="$clicks === 2" class="absolute inset-0 flex items-center justify-center">
+      <img src="/dA_zz_terms.svg" class="h-full w-auto object-contain dark:hidden" />
+      <img src="/dA_zz_terms_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
     </div>
-  </div>
-
-  <div v-click="2" v-if="$clicks < 3" class="absolute inset-0 flex items-center justify-center">
-    <img src="/dA_zz_terms.svg" class="h-full w-auto object-contain dark:hidden" />
-    <img src="/dA_zz_terms_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
-  </div>
-
+  </Transition>
 </div>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
 
 ---
 level: 2
@@ -752,6 +766,28 @@ Accuracy of different expansion orders evaluated at $z = 0.010$
     </div>
   </div>
 </template>
+
+---
+level: 3
+transition: fade
+---
+
+# Skymaps
+Error using multiple expansion points
+
+<span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
+<span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
+
+<div class="grid grid-cols-2 gap-4 w-full my-10">
+  <div v-for="base in ['/plots', '/plots_diov']" :key="base" class="flex items-center justify-center">
+    <template v-for="(n, i) in [6, 11, 21]" :key="n">
+      <template v-if="$clicks === i">
+        <img :src="`${base}/relative_error${n}.svg`" class="w-full object-contain dark:hidden" />
+        <img :src="`${base}/relative_error${n}_dark.svg`" class="w-full object-contain hidden dark:block" />
+      </template>
+    </template>
+  </div>
+</div>
 
 
 ---
