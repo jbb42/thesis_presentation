@@ -117,7 +117,7 @@ layout: two-cols
 
 <span></span>
 
-Using general relativity to solve the Universe
+Modelling the Universe using general relativity
 
 $$ R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} + \Lambda g_{\mu\nu} = \kappa T_{\mu\nu} $$
 
@@ -173,8 +173,8 @@ $$
 
 <v-click>
 
-Kinematical backreaction $Q_\mathcal{D}$ and non-zero average curvature $\langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}$ changes cosmological dynamics.
-Accelerating cosmological expansion without local accelerating expansion anywhere.
+Kinematical backreaction $Q_\mathcal{D}$ and non-zero average curvature $\langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}$ change cosmological dynamics
+Cosmological accelerated expansion without local acceleration!
 
 </v-click>
 
@@ -489,15 +489,27 @@ layout: two-cols
 # Training CNNs
 CNN results
 
-Accurate predictions for CNN1
+Accurate predictions for $N=64$
 
-Less accurate for CNN2 and CNN3
+<span v-click="2">Less accurate for $N=128$</span> <span v-click="4">and $N=64$ subset</span>
 
-Loss curve
+<v-click at="6">
+
+Difference in loss curves
+
+</v-click>
+
+<v-click at="7">
 
 Demonstrates proof of concept
 
-More work needed to use observations
+</v-click>
+
+<v-click at="8">
+
+More work needed for observations
+
+</v-click>
 
 ::right::
 
@@ -521,7 +533,7 @@ More work needed to use observations
 </div>
 
 <div v-click="1" v-if="$clicks < 2"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10">
-  <div v-click="1" class="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
+  <div class="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
     <div>
       <img src="/CNN_results/parity_plots_individual/cnn_Omega_m_f.svg" class="w-full h-full object-contain dark:hidden" />
       <img src="/CNN_results/parity_plots_individual/cnn_Omega_m_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
@@ -541,7 +553,90 @@ More work needed to use observations
   </div>
 </div>
 
-<div v-click="2" v-if="$clicks < 3"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10 flex items-center justify-center">
+
+<div v-click="2" v-if="$clicks < 3" class="absolute top-0 right-0 h-full w-[60%] grid grid-cols-2 grid-rows-2 gap-2 py-5 pr-10">
+  <div>
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_m_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_m_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Lambda_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Lambda_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_k_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_k_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Q_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Q_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+</div>
+
+<div v-click="3" v-if="$clicks < 4"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10">
+  <div class="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
+    <div>
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_m_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_m_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Lambda_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Lambda_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_k_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_k_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Q_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_128/cnn_Omega_Q_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+  </div>
+</div>
+
+
+<div v-click="4" v-if="$clicks < 5" class="absolute top-0 right-0 h-full w-[60%] grid grid-cols-2 grid-rows-2 gap-2 py-5 pr-10">
+  <div>
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_m_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_m_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Lambda_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Lambda_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_k_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_k_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Q_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Q_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+</div>
+
+<div v-click="5" v-if="$clicks < 6"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10">
+  <div class="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
+    <div>
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_m_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_m_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Lambda_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Lambda_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_k_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_k_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Q_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual_ss/cnn_Omega_Q_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+  </div>
+</div>
+
+
+<div v-click="6"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10 flex items-center justify-center">
   <div class="w-full h-full">
     <img src="/CNN_results/plots_tikz/loss_comparison_single.svg" class="w-full h-full object-contain dark:hidden" />
     <img src="/CNN_results/plots_tikz/loss_comparison_single_dark.svg" class="w-full h-full object-contain hidden dark:block" />
@@ -587,7 +682,7 @@ Exploring the inhomogeneous universe from observations
 
 * **Cosmographic expansion**
 
-  * Typically expanding around $z=0$ to, for instance, determine $H_0$ and $q_0$
+  * Traditionally expanded around $z=0$ to constrain local parameters like $H_0$ and $q_0$
   * Extending the expansion to an arbitrary redshift $z_*$
 
 </v-click>
@@ -604,7 +699,9 @@ Geodesic equation and transport equation for light rays
 $$\frac{\mathrm{d} k^\mu}{\mathrm{d} \lambda} + \Gamma^\mu_{\nu\alpha} k^\nu k^\alpha = 0 \\
 \frac{\mathrm{d}^2 \xi^a}{\mathrm{d} \lambda^2} = R_{\mu\rho\nu\sigma} k^\rho k^\nu E^{a\mu} E^\sigma_b \xi^b =: T^a_b \xi^b $$
 
-Defining the optical tidal matrix
+<v-click>
+Defining the optical tidal matrix:
+
 $$
   T_{ab} = \begin{pmatrix}
         \mathbf{R}-\Re(\mathbf{F}) & \Im(\mathbf{F}) \\
@@ -614,9 +711,13 @@ $$
 
 $$\mathbf{R} = -\frac{1}{2}R_{\mu\nu} k^\mu k^\nu\,,\quad
 \mathbf{F} = -\frac{1}{2}R_{\rho\mu\nu\alpha} (e^*)^\rho k^\mu k^\nu (e^*)^\alpha$$
+</v-click>
+
+<v-click>
 
 Using the linear relations $\xi^a = D^a_b \dot{\xi}_0^b\,$, the Jacobian evolves as $\ddot{D}^a_b = T^a_c D^c_b$
 $$d_A = \sqrt{\lvert\det{D}\rvert}$$
+</v-click>
 
 ---
 level: 3
@@ -651,7 +752,7 @@ $$
 
 <v-click>
 
-Using these to get a Taylor expansion to third order
+Yielding a third order Taylor expansion:
 
 $$d_A(z) \approx d_A(z_*) + d'_A(z_*)(z-z_*) + \frac{1}{2} d_A''(z_*)(z-z_*)^2 + \frac{1}{6}d_A'''(z_*)(z-z_*)^3$$
 
@@ -812,21 +913,53 @@ transition: slide-left
 ---
 
 # Future work
-* Simsilun
-  * More accuracte relativistic simulations
+
+* **Simsilun**
+
+  * More accurate relativistic simulations
   * Prepare for real data
   * Use CNNs to determine backreaction in our Universe
 
-* Cosmography
-  * Hej
+<div v-click class="mt-4">
 
-* Further examine relativistic effects in inhomogeneous cosmology  
+* **Cosmography**
+
+  * Improve cosmographic expansion by using rolling mean, Padé approximant, or more terms
+  * Determine dominant terms using more complex models
+  * Apply method to observational data
+
+</div>
+
+<div v-click class="mt-4">
+
+* Further examine these and other aspects of inhomogeneous cosmology
+
+</div>
+
 ---
 level: 2
 transition: fade
 ---
 
 # Summary
+
+<v-clicks>
+
+* Backreaction effects in Simsilun simulations
+
+* Neural networks predicted the effects well
+
+* Many low-resolution simulations better than few high-resolution
+
+* Cosmography around arbitrary expansion points is useful
+
+* Large density contrasts prove a challenge
+
+* Can be used to determine the local effective Hubble parameter
+
+* Further work required to determine the relativistic effects in inhomogeneous cosmology
+
+</v-clicks>
 
 
 ---
