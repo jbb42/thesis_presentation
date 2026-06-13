@@ -570,12 +570,14 @@ transition: view-transition
 Exploring the inhomogeneous universe from observations
 
 * **Motivation**
+
   * Emerging backreaction effects alter global dynamics
   * Investigating the inhomogeneous effects on local observations
 
 <v-click>
 
 * **Model-independent framework**
+
   * Examining local effects without assuming an underlying model
   * Looking at lensing and kinematical effects, not global backreaction
 
@@ -584,6 +586,7 @@ Exploring the inhomogeneous universe from observations
 <v-click>
 
 * **Cosmographic expansion**
+
   * Typically expanding around $z=0$ to, for instance, determine $H_0$ and $q_0$
   * Extending the expansion to an arbitrary redshift $z_*$
 
@@ -700,14 +703,61 @@ transition: slide-left
 
 ---
 level: 2
+transition: view-transition
+title: Skymaps
+---
+
+<div class="flex items-baseline justify-between w-full">
+  <h1 class="m-0">Skymaps</h1>
+  <p class="m-0">Comparing exact angular diameter distance and derivatives to FLRW</p>
+</div>
+
+<span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
+
+<SkymapAnimation 
+  basePath="/plots" 
+  diovPath="/plots_diov"
+  :comparison="true" 
+  :triggerClick="1"
+/>
+
+---
+level: 3
 transition: fade
 ---
 
 # Skymaps
 
+Accuracy of different expansion orders evaluated at $z = 0.010$
+
+<!-- Explicitly register 3 click steps with Slidev -->
+<span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
+<span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
+<span v-click="3" class="absolute w-0 h-0 overflow-hidden" />
+
+<template v-for="(anchors, clickIdx) in [
+  { v: '0.000', d: '0.000' },
+  { v: '0.007', d: '0.001' },
+  { v: '0.013', d: '0.003' },
+  { v: '0.019', d: '0.005' },
+]" :key="clickIdx">
+  <div v-show="$clicks === clickIdx" class="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
+    <div v-for="o in [0,1,2,3]" :key="'v'+o">
+      <img :src="`/plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}.svg`" class="w-full dark:hidden" />
+      <img :src="`/plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}_dark.svg`" class="w-full hidden dark:block" />
+    </div>
+    <div v-for="o in [0,1,2,3]" :key="'d'+o">
+      <img :src="`/plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}.svg`" class="w-full dark:hidden" />
+      <img :src="`/plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}_dark.svg`" class="w-full hidden dark:block" />
+    </div>
+  </div>
+</template>
+
+
 ---
 level: 1
 layout: section
+transition: view-transition
 ---
 
 # Conclusions
@@ -719,7 +769,15 @@ transition: slide-left
 ---
 
 # Future work
+* Simsilun
+  * More accuracte relativistic simulations
+  * Prepare for real data
+  * Use CNNs to determine backreaction in our Universe
 
+* Cosmography
+  * Hej
+
+* Further examine relativistic effects in inhomogeneous cosmology  
 ---
 level: 2
 transition: fade
