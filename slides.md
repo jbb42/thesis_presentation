@@ -740,11 +740,14 @@ level: 3
 transition: fade
 ---
 
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
 # Skymaps
 
 Accuracy of different expansion orders evaluated at $z = 0.010$
 
-<!-- Explicitly register 3 click steps with Slidev -->
 <span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
 <span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
 <span v-click="3" class="absolute w-0 h-0 overflow-hidden" />
@@ -757,12 +760,12 @@ Accuracy of different expansion orders evaluated at $z = 0.010$
 ]" :key="clickIdx">
   <div v-show="$clicks === clickIdx" class="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
     <div v-for="o in [0,1,2,3]" :key="'v'+o">
-      <img :src="`/plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}.svg`" class="w-full dark:hidden" />
-      <img :src="`/plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}_dark.svg`" class="w-full hidden dark:block" />
+      <img :src="`${base}plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}.svg`" class="w-full dark:hidden" />
+      <img :src="`${base}plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}_dark.svg`" class="w-full hidden dark:block" />
     </div>
     <div v-for="o in [0,1,2,3]" :key="'d'+o">
-      <img :src="`/plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}.svg`" class="w-full dark:hidden" />
-      <img :src="`/plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}_dark.svg`" class="w-full hidden dark:block" />
+      <img :src="`${base}plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}.svg`" class="w-full dark:hidden" />
+      <img :src="`${base}plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}_dark.svg`" class="w-full hidden dark:block" />
     </div>
   </div>
 </template>
@@ -772,6 +775,10 @@ level: 3
 transition: fade
 ---
 
+<script setup>
+const envBase = import.meta.env.BASE_URL
+</script>
+
 # Skymaps
 Error using multiple expansion points
 
@@ -779,11 +786,11 @@ Error using multiple expansion points
 <span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
 
 <div class="grid grid-cols-2 gap-4 w-full my-10">
-  <div v-for="base in ['/plots', '/plots_diov']" :key="base" class="flex items-center justify-center">
+  <div v-for="folder in ['plots', 'plots_diov']" :key="folder" class="flex items-center justify-center">
     <template v-for="(n, i) in [6, 11, 21]" :key="n">
       <template v-if="$clicks === i">
-        <img :src="`${base}/relative_error${n}.svg`" class="w-full object-contain dark:hidden" />
-        <img :src="`${base}/relative_error${n}_dark.svg`" class="w-full object-contain hidden dark:block" />
+        <img :src="`${envBase}${folder}/relative_error${n}.svg`" class="w-full object-contain dark:hidden" />
+        <img :src="`${envBase}${folder}/relative_error${n}_dark.svg`" class="w-full object-contain hidden dark:block" />
       </template>
     </template>
   </div>

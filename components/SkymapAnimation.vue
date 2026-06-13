@@ -9,6 +9,9 @@ const currentIndex = ref(0)
 const isPlaying = ref(false)
 let timer = null
 
+// CHANGE 1: Grab the GitHub Pages base URL
+const envBase = import.meta.env.BASE_URL
+
 const zIndices = Array.from({ length: 20 }, (_, i) => (0.001 + i * 0.001).toFixed(3))
 
 const toggle = () => {
@@ -32,12 +35,18 @@ watch(clicks, (val) => {
   }
 })
 
+// CHANGE 2: Inject envBase into the path generation
 const currentPaths = computed(() => {
   const z = zIndices[currentIndex.value]
-  const base = ['dA_contrast', 'dA_z_contrast', 'dA_zz_contrast', 'dA_zzz_contrast']
-  let paths = base.map(f => `${props.basePath}/z_${z}/${f}.svg`)
+  const baseFiles = ['dA_contrast', 'dA_z_contrast', 'dA_zz_contrast', 'dA_zzz_contrast'] // Renamed to avoid collision
+  
+  // .replace(/^\//, '') safely removes any leading slashes you passed in the prop so we don't get double slashes
+  const cleanBasePath = props.basePath.replace(/^\//, '')
+  let paths = baseFiles.map(f => `${envBase}${cleanBasePath}/z_${z}/${f}.svg`)
+  
   if (props.comparison && props.diovPath) {
-    let diov = base.map(f => `${props.diovPath}/z_${z}/${f}.svg`)
+    const cleanDiovPath = props.diovPath.replace(/^\//, '')
+    let diov = baseFiles.map(f => `${envBase}${cleanDiovPath}/z_${z}/${f}.svg`)
     return [...paths, ...diov]
   }
   return paths
