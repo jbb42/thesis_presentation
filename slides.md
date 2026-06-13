@@ -50,6 +50,7 @@ Examining the inhomogeneous universe through simulations, machine learning, and 
 
 </div>
 
+
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
@@ -258,7 +259,7 @@ level: 2
 transition: view-transition
 ---
 
-# The Simsilun equations
+# Simsilun equations
 Motivation and derivation
 
 
@@ -298,7 +299,7 @@ level: 3
 transition: view-transition
 ---
 
-# The Simsilun equations
+# Simsilun equations
 Silencing the Universe
 
 Assuming irrotational pressureless dust and vanishing magnetic Weyl tensor:
@@ -334,7 +335,7 @@ transition: slide-left
 layout: two-cols
 ---
 
-# The Simsilun equations
+# Simsilun equations
 Simplifying initial conditions
 
 
@@ -404,30 +405,52 @@ transition: slide-left
 layout: two-cols
 ---
 
-# The simulations
+# Simulations
 
 <span></span>
 
 Simulating universes numerically by solving Simsilun ODEs until $H=H_0$
 
-<v-click>
+<div class="text-16px">
 
-|            | N = 64       | N = 128      |
+<v-click at="1">
+
+|            | $N = 64$       | $N = 128$      |
 | ---------- | -------------- | -------------- |
-| $\Omega_m$ | [0.20, 0.40] | [0.20, 0.40] |
-| $\Omega_\Lambda$|[0.60, 0.80]|[0.60, 0.80]|
-| $h$        | [0.60, 0.80] | [0.60, 0.80] |
-| Increment  | 0.01         | 0.02         |
-| Versions   | 10           | 5            |
-| Total      | 92610        | 6655         | 
+| $\Omega_m$ | $[0.20, 0.40]$ | $[0.20, 0.40]$ |
+| $\Omega_\Lambda$|$[0.60, 0.80]$|$[0.60, 0.80]$|
+| $h$        | $[0.60, 0.80]$ | $[0.60, 0.80]$ |
+| Increment  | $0.01$         | $0.02$         |
+| Versions   | $10$           | $5$            |
+| Total      | $92610$        | $6655$         | 
 
 </v-click>
 
+</div>
 
 ::right::
-### INSERT EVOLUTION TRANSFORMATION AND CORNER PLOT
-<div class="h-full flex items-center justify-center" v-click="0">
-  <img src="/frontpic.png" />
+<div class="h-full w-full flex items-center justify-center relative">
+
+  <div v-click-hide="2" class="absolute inset-0 flex items-center justify-center">
+    <img src="/cube_initial.svg" class="w-full h-full dark:hidden" />
+    <img src="/cube_initial_dark.svg" class="w-full h-[80%] hidden dark:block" />
+  </div>
+
+  <div v-click="2" class="absolute inset-0 flex items-center justify-center">
+    <img src="/cube_final.svg" class="w-full h-full dark:hidden" />
+    <img src="/cube_final_dark.svg" class="w-full h-[80%] hidden dark:block" />
+  </div>
+
+  <div v-click="3" class="absolute inset-0 flex items-center justify-center">
+    <img src="/cornerplots/backreaction_corner_plot_64.svg" class="w-full h-auto dark:hidden" />
+    <img src="/cornerplots/backreaction_corner_plot_64_dark_fixed.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+
+  <div v-click="4" class="absolute inset-0 flex items-center justify-center">
+    <img src="/cornerplots/backreaction_corner_plot_128.svg" class="w-full h-auto dark:hidden" />
+    <img src="/cornerplots/backreaction_corner_plot_128_dark_fixed.svg" class="w-full h-auto hidden dark:block" />
+  </div>
+
 </div>
 
 <style>
@@ -476,9 +499,58 @@ Demonstrates proof of concept
 
 More work needed to use observations
 
+::right::
+
+<div v-if="$clicks < 1" class="absolute top-0 right-0 h-full w-[60%] grid grid-cols-2 grid-rows-2 gap-2 py-5 pr-10">
+  <div>
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_m_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_m_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_Lambda_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_Lambda_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_k_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_k_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+  <div>
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_Q_i.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/parity_plots_individual/cnn_Omega_Q_i_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+</div>
+
+<div v-click="1" v-if="$clicks < 2"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10">
+  <div v-click="1" class="w-full h-full grid grid-cols-2 grid-rows-2 gap-2">
+    <div>
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_m_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_m_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_Lambda_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_Lambda_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_k_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_k_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+    <div>
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_Q_f.svg" class="w-full h-full object-contain dark:hidden" />
+      <img src="/CNN_results/parity_plots_individual/cnn_Omega_Q_f_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+    </div>
+  </div>
+</div>
+
+<div v-click="2" v-if="$clicks < 3"  class="absolute top-0 right-0 h-full w-[60%] py-5 pr-10 flex items-center justify-center">
+  <div class="w-full h-full">
+    <img src="/CNN_results/plots_tikz/loss_comparison_single.svg" class="w-full h-full object-contain dark:hidden" />
+    <img src="/CNN_results/plots_tikz/loss_comparison_single_dark.svg" class="w-full h-full object-contain hidden dark:block" />
+  </div>
+</div>
+
 <style>
 .slidev-layout.two-columns {
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 33% 66%;
 }
 </style>
 
@@ -601,7 +673,7 @@ transition: slide-left
 
 <div class="relative h-full w-full flex items-center justify-center">
 
-  <div v-if="$slidev.nav.clicks === 0" class="grid grid-cols-2 gap-4 items-center justify-items-center h-full w-full">
+  <div class="grid grid-cols-2 gap-4 items-center justify-items-center h-full w-full">
     <div class="flex flex-col items-center justify-center h-full">
       <img src="/rho_r.svg" class="h-full w-auto object-contain dark:hidden" />
       <img src="/rho_r_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
@@ -612,14 +684,14 @@ transition: slide-left
     </div>
   </div>
 
-  <div v-click="1" v-click-hide="2" class="absolute inset-0 w-full h-full">
+  <div v-click="1" v-if="$clicks < 2" class="absolute inset-0 w-full h-full">
     <div class="absolute right-0 bottom-0 w-full h-[70vh] flex items-end justify-end p-6">
       <img src="/fiducial_vs_expansion.svg" class="w-full h-auto max-h-full object-contain dark:hidden" />
       <img src="/fiducial_vs_expansion_dark.svg" class="w-full h-auto max-h-full object-contain hidden dark:block" />
     </div>
   </div>
 
-  <div v-click="2" class="absolute inset-0 flex items-center justify-center">
+  <div v-click="2" v-if="$clicks < 3" class="absolute inset-0 flex items-center justify-center">
     <img src="/dA_zz_terms.svg" class="h-full w-auto object-contain dark:hidden" />
     <img src="/dA_zz_terms_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
   </div>
