@@ -82,6 +82,7 @@ const slots = [
 let rafId = null
 let last = 0
 let isVisible = false
+let resizeObserver = null // Keeps track of our observer
 
 function stopLoop() {
   if (rafId !== null) {
@@ -95,7 +96,7 @@ function startLoop() {
   last = performance.now()
   function loop(now) {
     let dt = (now - last) / 1000
-    if (dt > 0.1) dt = 0.1 // ← Fix 1: Clamp delta time to prevent explosive jumps
+    if (dt > 0.1) dt = 0.1 
     
     updateSimulation(dt)
     last = now
@@ -113,7 +114,6 @@ function restartSimulation() {
   cyclists.value = []
   plotHistory.value = []
 
-  // ← Fix 2: Removed nextTick() to spawn instantly and prevent race conditions
   spawn('red', redSpeed, 0, 0)
   spawn('blue', blueSpeed, 0, 0)
 }
@@ -206,7 +206,6 @@ function drawPlotOnRoad() {
   const stepX = canvas.width / totalPoints
 
   ctx.lineWidth = 3
-  // ← Fix 3: Standard RGBA instead of 4-digit hex to ensure reliable line drawing
   ctx.strokeStyle = 'rgba(170, 85, 204, 0.8)' 
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
@@ -235,6 +234,7 @@ async function tryStart() {
   const nowVisible = !el.closest('.slidev-vclick-hidden')
 
   if (nowVisible && !isVisible) {
+    resizeCanvas() // Forces a recalculation exactly when Slidev makes it visible
     restartSimulation()
     startLoop()
   } else if (!nowVisible && isVisible) {
@@ -245,9 +245,14 @@ async function tryStart() {
 
 onMounted(() => {
   nextTick().then(() => {
-    resizeCanvas()
-    setTimeout(resizeCanvas, 100)
-    window.addEventListener('resize', resizeCanvas)
+    // Bulletproof dynamic resizing observer
+    if (track.value) {
+      resizeObserver = new ResizeObserver(() => {
+        resizeCanvas()
+      })
+      resizeObserver.observe(track.value)
+    }
+    
     tryStart()
   })
 })
@@ -256,7 +261,10 @@ watch(clicks, tryStart)
 
 onBeforeUnmount(() => {
   stopLoop()
-  window.removeEventListener('resize', resizeCanvas)
+  if (resizeObserver && track.value) {
+    resizeObserver.unobserve(track.value)
+    resizeObserver.disconnect()
+  }
 })
 </script>
 

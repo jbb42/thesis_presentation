@@ -432,13 +432,13 @@ Simulating universes numerically by solving Simsilun ODEs until $H=H_0$
 <div class="h-full w-full flex items-center justify-center relative">
 
   <div v-click-hide="2" class="absolute inset-0 flex items-center justify-center">
-    <img src="/cube_initial.svg" class="w-full h-full dark:hidden" />
-    <img src="/cube_initial_dark.svg" class="w-full h-[80%] hidden dark:block" />
+    <img src="/cube_initial.svg" loading="eager" decoding="sync" class="w-full h-full dark:hidden" />
+    <img src="/cube_initial_dark.svg" loading="eager" decoding="sync" class="w-full h-[80%] hidden dark:block" />
   </div>
 
   <div v-click="2" class="absolute inset-0 flex items-center justify-center">
-    <img src="/cube_final.svg" class="w-full h-full dark:hidden" />
-    <img src="/cube_final_dark.svg" class="w-full h-[80%] hidden dark:block" />
+    <img src="/cube_final.svg" loading="eager" decoding="sync" class="w-full h-full dark:hidden" />
+    <img src="/cube_final_dark.svg" loading="eager" decoding="sync" class="w-full h-[80%] hidden dark:block" />
   </div>
 
   <div v-click="3" class="absolute inset-0 flex items-center justify-center">
