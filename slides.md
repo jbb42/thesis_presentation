@@ -639,8 +639,8 @@ Exploring the inhomogeneous universe from observations
 
 * **Motivation**
 
-  * Emerging backreaction effects alter global dynamics
-  * Investigating the inhomogeneous effects on local observations
+  * We have shown how inhomogeneities affect global dynamics through backreaction.
+  * How do inhomogeneities affect local observations?
 
 <v-click>
 
@@ -669,12 +669,13 @@ transition: view-transition
 # Theory
 Ray tracing
 
-Geodesic equation and transport equation for light rays
-$$\frac{\mathrm{d} k^\mu}{\mathrm{d} \lambda} + \Gamma^\mu_{\nu\alpha} k^\nu k^\alpha = 0 \\
-\frac{\mathrm{d}^2 \xi^a}{\mathrm{d} \lambda^2} = R_{\mu\rho\nu\sigma} k^\rho k^\nu E^{a\mu} E^\sigma_b \xi^b =: T^a_b \xi^b $$
+Geodesic equation and transport equation for light rays:
+$$\frac{\mathrm{d} k^\mu}{\mathrm{d} \lambda} + \Gamma^\mu_{\nu\alpha} k^\nu k^\alpha = 0$$
+
+
+$$\frac{\mathrm{d}^2 \xi^a}{\mathrm{d} \lambda^2} = R_{\mu\rho\nu\sigma} k^\rho k^\nu E^{a\mu} E^\sigma_b \xi^b =: T^a_b \xi^b $$
 
 <v-click>
-Defining the optical tidal matrix:
 
 $$
   T_{ab} = \begin{pmatrix}
@@ -689,7 +690,7 @@ $$\mathbf{R} = -\frac{1}{2}R_{\mu\nu} k^\mu k^\nu\,,\quad
 
 <v-click>
 
-Using the linear relations $\xi^a = D^a_b \dot{\xi}_0^b\,$, the Jacobian evolves as $\ddot{D}^a_b = T^a_c D^c_b$
+The linear relation $\xi^a = D^a_b \dot{\xi}_0^b$ yields the Jacobi equation $\ddot{D}^a_b = T^a_c D^c_b$, from which we define:
 $$d_A = \sqrt{\lvert\det{D}\rvert}$$
 </v-click>
 
@@ -726,7 +727,7 @@ $$
 
 <v-click>
 
-Yielding a third order Taylor expansion:
+Constructing a third-order Taylor expansion around $z_*$:
 
 $$d_A(z) \approx d_A(z_*) + d'_A(z_*)(z-z_*) + \frac{1}{2} d_A''(z_*)(z-z_*)^2 + \frac{1}{6}d_A'''(z_*)(z-z_*)^3$$
 
