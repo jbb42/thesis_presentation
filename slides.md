@@ -260,7 +260,7 @@ transition: view-transition
 ---
 
 # Simsilun equations
-Motivation and derivation
+Silencing the Universe
 
 
 Cosmological simulations are approximations of the Universe
@@ -279,43 +279,9 @@ Simplified silent universe (Simsilun) as a numerical approach without PBCs <ArXi
 
 <v-click>
 
-Starting with general fluid description:
-
-$$
-\begin{align*}
-  \dot{\rho} &= - (\rho + p)\Theta - \pi^{\mu\nu} \sigma_{\mu\nu} - q^{\nu}{}_{;\nu} -  q^\mu A_\mu\\
-  \dot{\Theta} &= A_\mu A^\mu + \mathrm{D}_\mu A^\mu - 2(\sigma^2 -\omega^2) - \frac{1}{3}\Theta^2 - \frac{\kappa}{2}(\rho + 3 p) + \Lambda \\
-  \dot{\sigma}_{\langle\mu\nu\rangle} &= A_{\langle\mu} A_{\rangle\nu}
-    + \mathrm{D}_{\langle\mu}A_{\nu\rangle} - \sigma_{\langle\mu|\rho}\sigma^\rho{}_{\nu\rangle} - \omega_{\langle\mu} \omega_{\nu\rangle} 
-    - \frac{2}{3}\Theta\sigma_{\mu\nu} -E_{\mu\nu} + \frac{\kappa}{2}\pi_{\mu\nu} \\
-    \dot{E}_{\langle\mu\nu\rangle} &= -\Theta E_{\mu\nu} + \mathrm{curl}\, H_{\mu\nu} - \frac{\kappa}{2} (\rho + p) \sigma_{\mu\nu} - \frac{\kappa}{2} \dot{\pi}_{\mu\nu} - \frac{\kappa}{6} \Theta \pi_{\mu\nu} + 3 \sigma_{\langle\mu}{}^\alpha \left( E_{\nu\rangle\alpha} - \frac{\kappa}{6} \pi_{\nu\rangle\alpha} \right)
-\end{align*}
-$$
-
-</v-click>
-
----
-level: 3
-transition: view-transition
----
-
-# Simsilun equations
-Silencing the Universe
-
 Assuming irrotational pressureless dust and vanishing magnetic Weyl tensor:
 
-$$
-    \omega_{\mu\nu} = 0\,,\quad
-    A_\mu = 0\,,\quad
-    q_\mu = 0\,,\quad
-    p = 0\,,\quad
-    \pi_{\mu\nu} = 0\,,\quad
-    H_{\mu\nu} = 0
-$$
-
-<v-click>
-
-Using $\sigma_{\mu\nu} = \Sigma e_{\mu\nu}$ and $E_{\mu\nu} = \mathcal{W} e_{\mu\nu}$ yields five scalar differential equations
+<div class="text-16px">
 
 $$\begin{align*}
     \dot{\rho} &= -\rho \Theta\\
@@ -325,9 +291,16 @@ $$\begin{align*}
     \dot{V} &= \Theta V
 \end{align*}$$
 
+</div>
+
+</v-click>
+
+<v-click>
+
 Solve for each cell to simulate universes
 
 </v-click>
+
 
 ---
 level: 3
@@ -339,7 +312,7 @@ layout: two-cols
 Simplifying initial conditions
 
 
-Perturbation theory using density contrast $\delta$
+Perturbation theory from density contrast $\delta$
 
 $$
 \begin{align*}
@@ -409,11 +382,11 @@ layout: two-cols
 
 <span></span>
 
-Simulating universes numerically by solving Simsilun ODEs until $H=H_0$
+Simulating universes numerically by solving Simsilun ODEs until $H_\mathrm{bg}=H_0$
 
 <div class="text-16px">
 
-<v-click at="1">
+<v-click at="2">
 
 |            | $N = 64$       | $N = 128$      |
 | ---------- | -------------- | -------------- |
@@ -431,12 +404,12 @@ Simulating universes numerically by solving Simsilun ODEs until $H=H_0$
 ::right::
 <div class="h-full w-full flex items-center justify-center relative">
 
-  <div v-click-hide="2" class="absolute inset-0 flex items-center justify-center">
+  <div v-click-hide="1" class="absolute inset-0 flex items-center justify-center">
     <img src="/cube_initial.svg" loading="eager" decoding="sync" class="w-full h-full dark:hidden" />
     <img src="/cube_initial_dark.svg" loading="eager" decoding="sync" class="w-full h-[80%] hidden dark:block" />
   </div>
 
-  <div v-click="2" class="absolute inset-0 flex items-center justify-center">
+  <div v-click="1" class="absolute inset-0 flex items-center justify-center">
     <img src="/cube_final.svg" loading="eager" decoding="sync" class="w-full h-full dark:hidden" />
     <img src="/cube_final_dark.svg" loading="eager" decoding="sync" class="w-full h-[80%] hidden dark:block" />
   </div>
@@ -682,6 +655,7 @@ Exploring the inhomogeneous universe from observations
 
 * **Cosmographic expansion**
 
+  * Taylor expansion of observable
   * Traditionally expanded around $z=0$ to constrain local parameters like $H_0$ and $q_0$
   * Extending the expansion to an arbitrary redshift $z_*$
 
@@ -710,7 +684,7 @@ $$
 $$
 
 $$\mathbf{R} = -\frac{1}{2}R_{\mu\nu} k^\mu k^\nu\,,\quad
-\mathbf{F} = -\frac{1}{2}R_{\rho\mu\nu\alpha} (e^*)^\rho k^\mu k^\nu (e^*)^\alpha$$
+\mathbf{F} = -\frac{1}{2}C_{\rho\mu\nu\alpha} (e^*)^\rho k^\mu k^\nu (e^*)^\alpha$$
 </v-click>
 
 <v-click>
@@ -819,22 +793,38 @@ transition: slide-left
 ---
 level: 2
 transition: view-transition
-title: Skymaps
 ---
 
-<div class="flex items-baseline justify-between w-full">
-  <h1 class="m-0">Skymaps</h1>
-  <p class="m-0">Comparing exact angular diameter distance and derivatives to FLRW</p>
-</div>
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
 
+# Skymaps
+
+Comparing exact $d_A$ and derivatives to FLRW counterparts
 <span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
+<span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
+<span v-click="3" class="absolute w-0 h-0 overflow-hidden" />
 
-<SkymapAnimation 
-  basePath="/plots" 
-  diovPath="/plots_diov"
-  :comparison="true" 
-  :triggerClick="1"
-/>
+<template v-for="(anchors, clickIdx) in [
+  { v: '0.001', d: '0.001' },
+  { v: '0.007', d: '0.004' },
+  { v: '0.013', d: '0.007' },
+  { v: '0.019', d: '0.010' },
+]" :key="clickIdx">
+  <div v-show="$clicks === clickIdx" class="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
+    <div v-for="f in ['dA_contrast', 'dA_z_contrast', 'dA_zz_contrast', 'dA_zzz_contrast']" :key="'v'+f">
+      <img :src="`${base}plots/z_${anchors.v}/${f}.svg`" class="w-full dark:hidden" />
+      <img :src="`${base}plots/z_${anchors.v}/${f}_dark.svg`" class="w-full hidden dark:block" />
+    </div>
+    <div v-for="f in ['dA_contrast', 'dA_z_contrast', 'dA_zz_contrast', 'dA_zzz_contrast']" :key="'d'+f">
+      <img :src="`${base}plots_diov/z_${anchors.d}/${f}.svg`" class="w-full dark:hidden" />
+      <img :src="`${base}plots_diov/z_${anchors.d}/${f}_dark.svg`" class="w-full hidden dark:block" />
+    </div>
+  </div>
+</template>
+
+
 
 ---
 level: 3
@@ -847,7 +837,7 @@ const base = import.meta.env.BASE_URL
 
 # Skymaps
 
-Accuracy of different expansion orders evaluated at $z = 0.010$
+Accuracy of different expansion orders evaluated at $z = 0.010$ and $z = 0.002$
 
 <span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
 <span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
