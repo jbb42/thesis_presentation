@@ -479,17 +479,10 @@ transition: view-transition
 # Training CNNs
 Convolutional neural network architecture
 
-<div class="h-full">
-  <LightOrDark>
-    <template #light>
-      <img src="/cnn.svg" class="w-full mx-auto" alt="CNN Architecture Light" />
-    </template>
-    <template #dark>
-      <img src="/cnn_dark.svg" class="w-full mx-auto" alt="CNN Architecture Dark" />
-    </template>
-  </LightOrDark>
+<div class="w-full flex items-center justify-center mt-0">
+  <img src="/cnn.svg" class="w-full mx-auto dark:hidden" alt="CNN Architecture Light" />
+  <img src="/cnn_dark.svg" class="w-full mx-auto hidden dark:block" alt="CNN Architecture Dark" />
 </div>
-
 
 
 ---
@@ -839,7 +832,6 @@ level: 2
 transition: slide-left
 ---
 
-
 # Fiducial ray
 
 <div class="relative h-full w-full flex items-center justify-center">
@@ -857,31 +849,16 @@ transition: slide-left
   <span v-click="1" class="absolute w-0 h-0 overflow-hidden" />
   <span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
 
-<Transition name="fade">
-  <div v-if="$clicks === 1" class="absolute inset-0 flex items-end justify-end pb-4">
+  <div v-show="$clicks === 1" class="absolute inset-0 flex items-end justify-end pb-4">
     <img src="/fiducial_vs_expansion.svg" class="w-full h-full object-contain dark:hidden" />
     <img src="/fiducial_vs_expansion_dark.svg" class="w-full h-full object-contain hidden dark:block" />
   </div>
-</Transition>
 
-  <Transition name="fade">
-    <div v-if="$clicks === 2" class="absolute inset-0 flex items-center justify-center">
-      <img src="/dA_zz_terms.svg" class="h-full w-auto object-contain dark:hidden" />
-      <img src="/dA_zz_terms_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
-    </div>
-  </Transition>
+  <div v-show="$clicks === 2" class="absolute inset-0 flex items-center justify-center">
+    <img src="/dA_zz_terms.svg" class="h-full w-auto object-contain dark:hidden" />
+    <img src="/dA_zz_terms_dark.svg" class="h-full w-auto object-contain hidden dark:block" />
+  </div>
 </div>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
 
 
 ---
