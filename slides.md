@@ -130,10 +130,10 @@ $$ \mathrm{d} s^2 = -\mathrm{d} t^2 + a(t)^2 \bigg( \frac{1}{1-kr^2} \mathrm{d} 
 <v-click>
 Friedmann equations describe the dynamics of the Universe
 
-$$ \begin{align*}
+$$ \begin{aligned}
 \frac{\dot{a}^2}{a^2} &\equiv H^2 = \frac{\kappa}{3} \rho - \frac{k}{a^2} + \frac{\Lambda}{3} \\
 \frac{\ddot{a}}{a} &= -\frac{\kappa}{6} (\rho+3p) + \frac{\Lambda}{3} 
-\end{align*}
+\end{aligned}
 $$
 
 Flat universe with accelerating expansion --- $\Lambda$CDM model
@@ -165,11 +165,11 @@ Large-scale effects from small-scale inhomogeneities?
 
 <v-click>
 $$
-\begin{align*}
+\begin{aligned}
     3\frac{\dot{a}_\mathcal{D}^2}{a_\mathcal{D}^2} &= 3H_\mathcal{D}^2 = {\color{CadetBlue}- \frac{1}{2} \langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}} + \kappa \langle\rho\rangle_\mathcal{D} + \Lambda - {\color{CadetBlue}\frac{1}{2} Q_\mathcal{D}}\\
     3\frac{\ddot{a}_\mathcal{D}}{a_\mathcal{D}} &= {\color{CadetBlue}Q_\mathcal{D}} - \frac{\kappa}{2}\langle \rho \rangle_\mathcal{D} + \Lambda\\
     Q_\mathcal{D} &= \frac{2}{3}\big(\langle \Theta^2 \rangle_\mathcal{D} - \langle \Theta \rangle_\mathcal{D}^2\big)  - 2\langle \sigma^2 \rangle_\mathcal{D}
-\end{align*}
+\end{aligned}
 $$
 </v-click>
 
@@ -216,7 +216,7 @@ $$\mathrm{d} s^2 = -\mathrm{d} t^2 + \frac{A'(t, r)^2}{1-k(r)} \mathrm{d} r^2 + 
 
 <v-click>
 
-<font color="#3d7fc2">Void surrounded by overdensity</font> and <font color="#e16171">Gaussian overdensity</font>
+<span color="#3d7fc2">Void surrounded by overdensity</span> and <span color="#e16171">Gaussian overdensity</span>
 
 </v-click>
 
@@ -284,13 +284,13 @@ Assuming irrotational, pressureless dust and vanishing magnetic Weyl tensor:
 
 <div class="text-16px">
 
-$$\begin{align*}
+$$\begin{aligned}
     \dot{\rho} &= -\rho \Theta\\
     \dot{\Theta} &= -\frac{1}{3}\Theta^2 - \frac{1}{2}\kappa \rho - 6 \Sigma^2 + \Lambda\\
     \dot{\Sigma} &= -\frac{2}{3}\Theta \Sigma + \Sigma^2 - \mathcal{W}\\
     \dot{\mathcal{W}} &= -\Theta \mathcal{W} - \frac{1}{2}\kappa \rho \Sigma - 3 \Sigma \mathcal{W}\\
     \dot{V} &= \Theta V
-\end{align*}$$
+\end{aligned}$$
 
 </div>
 
@@ -316,13 +316,13 @@ Simplifying initial conditions
 Perturbation theory from density contrast $\delta$
 
 $$
-\begin{align*}
+\begin{aligned}
     \rho_i &= \bar{\rho}(1 + \delta_i) \\
     \Theta_i &= \bar{\Theta}\bigg(1 - \frac{1}{3}\delta_i\bigg) \\
     \Sigma_i &= \frac{1}{9}\bar{\Theta} \delta_i \\
     \mathcal{W}_i &= -\frac{\kappa}{6}\bar{\rho} \delta_i\\
     V_i &= \frac{1}{1+\delta_i}
-\end{align*}
+\end{aligned}
 $$
 
 
@@ -447,8 +447,8 @@ Training three networks to predict $\Omega_m$, $\Omega_\Lambda$, $\Omega_k$, $\O
 
  |      | CNN1 | CNN2 | CNN3 |
  | ---- | ---- | ---- | ---- |
- | $N$  | $64$ | $128$| $64$ |
- | $#$  |$92610$|$6655$|$6655$| 
+ | Sidelength $N$  | $64$ | $128$| $64$ |
+ | # Simulations  |$92610$|$6655$|$6655$| 
 
 </v-click>
 
@@ -883,9 +883,10 @@ transition: slide-left
 }
 </style>
 
+
 ---
 level: 2
-transition: view-transition
+transition: slide-up
 ---
 
 <script setup>
@@ -905,15 +906,22 @@ Comparing exact $d_A$ and derivatives to FLRW counterparts
   { v: '0.013', d: '0.007' },
   { v: '0.019', d: '0.010' },
 ]" :key="clickIdx">
-  <div v-show="$clicks === clickIdx" class="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
+  <div v-show="$clicks === clickIdx" class="grid grid-cols-[30px_1fr_1fr_1fr_1fr] grid-rows-2 gap-y-4 gap-x-2 mt-8 items-center">
+    <div class="flex justify-center items-center h-full">
+      <div class="-rotate-90 text-sm font-bold tracking-widest opacity-70 whitespace-nowrap">LTB1 at <i>z<sub>*</sub></i> = {{ anchors.v }}</div>
+    </div>
     <div v-for="f in ['dA_contrast', 'dA_z_contrast', 'dA_zz_contrast', 'dA_zzz_contrast']" :key="'v'+f">
       <img :src="`${base}plots/z_${anchors.v}/${f}.svg`" class="w-full dark:hidden" />
       <img :src="`${base}plots/z_${anchors.v}/${f}_dark.svg`" class="w-full hidden dark:block" />
+    </div>
+    <div class="flex justify-center items-center h-full">
+      <div class="-rotate-90 text-sm font-bold tracking-widest opacity-70 whitespace-nowrap">LTB2 at <i>z<sub>*</sub></i> = {{ anchors.d }}</div>
     </div>
     <div v-for="f in ['dA_contrast', 'dA_z_contrast', 'dA_zz_contrast', 'dA_zzz_contrast']" :key="'d'+f">
       <img :src="`${base}plots_diov/z_${anchors.d}/${f}.svg`" class="w-full dark:hidden" />
       <img :src="`${base}plots_diov/z_${anchors.d}/${f}_dark.svg`" class="w-full hidden dark:block" />
     </div>
+    
   </div>
 </template>
 
@@ -942,15 +950,22 @@ Accuracy of different expansion orders evaluated at $z = 0.010$ and $z = 0.002$
   { v: '0.013', d: '0.003' },
   { v: '0.019', d: '0.005' },
 ]" :key="clickIdx">
-  <div v-show="$clicks === clickIdx" class="grid grid-cols-4 grid-rows-2 gap-4 mt-8">
+  <div v-show="$clicks === clickIdx" class="grid grid-cols-[30px_1fr_1fr_1fr_1fr] grid-rows-2 gap-y-4 gap-x-2 mt-8 items-center">
+    <div class="flex justify-center items-center h-full">
+      <div class="-rotate-90 text-sm font-bold tracking-widest opacity-70 whitespace-nowrap">LTB1 at <i>z</i> = 0.010</div>
+    </div>
     <div v-for="o in [0,1,2,3]" :key="'v'+o">
       <img :src="`${base}plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}.svg`" class="w-full dark:hidden" />
       <img :src="`${base}plots/expansion_errors_at_z0.010/error_order_${o}_anchor_${anchors.v}_dark.svg`" class="w-full hidden dark:block" />
+    </div>
+    <div class="flex justify-center items-center h-full">
+      <div class="-rotate-90 text-sm font-bold tracking-widest opacity-70 whitespace-nowrap">LTB2 at <i>z</i> = 0.002</div>
     </div>
     <div v-for="o in [0,1,2,3]" :key="'d'+o">
       <img :src="`${base}plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}.svg`" class="w-full dark:hidden" />
       <img :src="`${base}plots_diov/expansion_errors_at_z0.002/error_order_${o}_anchor_${anchors.d}_dark.svg`" class="w-full hidden dark:block" />
     </div>
+    
   </div>
 </template>
 
@@ -970,6 +985,7 @@ Error using multiple expansion points
 <span v-click="2" class="absolute w-0 h-0 overflow-hidden" />
 
 <div class="grid grid-cols-2 gap-4 w-full my-10">
+  
   <div v-for="folder in ['plots', 'plots_diov']" :key="folder" class="flex items-center justify-center">
     <template v-for="(n, i) in [6, 11, 21]" :key="n">
       <template v-if="$clicks === i">
@@ -978,8 +994,8 @@ Error using multiple expansion points
       </template>
     </template>
   </div>
+  
 </div>
-
 
 ---
 level: 1
