@@ -72,7 +72,7 @@ transition: fade
 * Compare to ray tracing results in LTB models
 </GradientBox>
 
-<div class="absolute right-10 top-4 w-66">
+<div class="absolute right-10 top-7 w-66">
   <Toc text :columns="1" minDepth="1" maxDepth="2" />
 </div>
 
@@ -92,8 +92,8 @@ transition: fade
 
 :deep(.slidev-toc li li a) {
   font-weight: 400 !important; /* Standard, un-bolded weight */
-  font-size: 1rem !important;
-  opacity: 0.8 !important;
+  font-size: 0.9rem !important;
+  opacity: 0.7 !important;
 }
 </style>
 
@@ -157,15 +157,17 @@ transition: slide-left
 
 <span></span>
 
-Large-scale effects from small-scale inhomogeneities?
+Spatial averaging and time derivatives do not commute: $\langle \Psi \rangle\dot{}_\mathcal{D}\neq\langle \dot{\Psi} \rangle_\mathcal{D}$
 
 <v-click>
-Spatial averages and time derivatives do not commute. Averaging local equations:
+Large-scale effects from small-scale inhomogeneities?
+</v-click>
 
+<v-click>
 $$
 \begin{align*}
-    3\frac{\dot{a}_\mathcal{D}^2}{a_\mathcal{D}^2} &= 3H_\mathcal{D}^2 = - \frac{1}{2} \langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D} + \kappa \langle\rho\rangle_\mathcal{D} + \Lambda - \frac{1}{2} Q_\mathcal{D}\\
-    3\frac{\ddot{a}_\mathcal{D}}{a_\mathcal{D}} &= Q_\mathcal{D} - \frac{\kappa}{2}\langle \rho \rangle_\mathcal{D} + \Lambda\\
+    3\frac{\dot{a}_\mathcal{D}^2}{a_\mathcal{D}^2} &= 3H_\mathcal{D}^2 = {\color{CadetBlue}- \frac{1}{2} \langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}} + \kappa \langle\rho\rangle_\mathcal{D} + \Lambda - {\color{CadetBlue}\frac{1}{2} Q_\mathcal{D}}\\
+    3\frac{\ddot{a}_\mathcal{D}}{a_\mathcal{D}} &= {\color{CadetBlue}Q_\mathcal{D}} - \frac{\kappa}{2}\langle \rho \rangle_\mathcal{D} + \Lambda\\
     Q_\mathcal{D} &= \frac{2}{3}\big(\langle \Theta^2 \rangle_\mathcal{D} - \langle \Theta \rangle_\mathcal{D}^2\big)  - 2\langle \sigma^2 \rangle_\mathcal{D}
 \end{align*}
 $$
@@ -173,7 +175,6 @@ $$
 
 <v-click>
 
-Kinematical backreaction $Q_\mathcal{D}$ and non-zero average curvature $\langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}$ change cosmological dynamics
 Cosmological accelerated expansion without local acceleration!
 
 </v-click>
@@ -215,7 +216,7 @@ $$\mathrm{d} s^2 = -\mathrm{d} t^2 + \frac{A'(t, r)^2}{1-k(r)} \mathrm{d} r^2 + 
 
 <v-click>
 
-Void surrounded by overdensity
+<font color="#3d7fc2">Void surrounded by overdensity</font> and <font color="#e16171">Gaussian overdensity</font>
 
 </v-click>
 
@@ -279,7 +280,7 @@ Simplified silent universe (Simsilun) as a numerical approach without PBCs <ArXi
 
 <v-click>
 
-Assuming irrotational pressureless dust and vanishing magnetic Weyl tensor:
+Assuming irrotational, pressureless dust and vanishing magnetic Weyl tensor:
 
 <div class="text-16px">
 
@@ -434,6 +435,44 @@ Simulating universes numerically by solving Simsilun ODEs until $H_\mathrm{bg}=H
 
 ---
 level: 2
+transition: view-transition
+---
+
+# Training CNNs
+Using machine learning to predict parameters
+
+Training three networks to predict $\Omega_m$, $\Omega_\Lambda$, $\Omega_k$, $\Omega_Q$, and $h$ from final density maps
+
+<v-click>
+
+ |      | CNN1 | CNN2 | CNN3 |
+ | ---- | ---- | ---- | ---- |
+ | $N$  | $64$ | $128$| $64$ |
+ | $#$  |$92610$|$6655$|$6655$| 
+
+</v-click>
+
+<v-click>
+
+Same network architecture and hyperparameters (extra input layer for CNN2)
+
+</v-click>
+
+<v-click>
+
+60%/20%/20% split between training/validation/test data
+
+</v-click>
+
+<v-click>
+
+Training for up to 250 epochs with early stopping after 20
+
+</v-click>
+
+
+---
+level: 3
 transition: view-transition
 ---
 
@@ -705,27 +744,79 @@ Cosmographic expansion
 
 Relating redshift $z$ and affine parameter $\lambda$ through  $\frac{\mathrm{d} z}{\mathrm{d} \lambda} = -E_o\mathcal{H} (1+z)^2$ and using $\frac{\mathrm{d} d_A}{\mathrm{d} \lambda} = \frac{1}{2}\hat{\theta}d_A$:
 
-<v-click>
 
-<div class="text-15px">
+<div class="text-15px mt--4 mb-10">
 
-$$
-\begin{aligned}
-\frac{\mathrm{d} d_A}{\mathrm{d} z} &= - \frac{\hat{\theta}}{2(1+z)^2 E_o\mathcal{H}} d_A
-\\
-\frac{\mathrm{d}^2 d_A}{\mathrm{d} z^2} &= \frac{d_A}{2(1+z)^4 E_o^2 \mathcal{H}^2} \bigg[2{\hat{\theta}} E_o \mathcal{H}(1+z) - 2{\lvert\hat{\sigma}\rvert^2} - k^\mu k^\nu {R_{\mu\nu}} - \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda}  \bigg]
-\\
-\frac{\mathrm{d}^3 d_A}{\mathrm{d} z^3} &= \frac{d_A}{2(1+z)^6 E_o^3 \mathcal{H}^3} \bigg[
-    6\bigg(2 E_o \mathcal{H}{\lvert\hat{\sigma}\rvert^2} + E_o \mathcal{H} k^\mu k^\nu R_{\mu\nu} + E_o {\hat{\theta}} \frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg) (1+z) - 6 E_o^2 \mathcal{H}^2 {\hat{\theta}} (1+z)^2 -3 {\hat{\theta}} {\lvert\hat{\sigma}\rvert^2} \\
-    &\quad- \frac{3}{\mathcal{H}}\bigg({2{\lvert\hat{\sigma}\rvert^2}} + {k^\mu k^\nu R_{\mu\nu}}\bigg)\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} - \frac{3{\hat{\theta}}}{\mathcal{H}^2}\bigg(\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg)^2 + \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d}^2 \mathcal{H}}{\mathrm{d} \lambda^2} - 2 k^\alpha k^\beta C_{\rho\alpha\sigma\beta} \hat{\sigma}^{\rho\sigma} + \frac{\hat{\theta} k^\mu k^\nu R_{\mu\nu}}{2} + \frac{\mathrm{d} (k^\mu k^\nu R_{\mu\nu})}{\mathrm{d} \lambda} \bigg]
-\end{aligned}
-$$
+<EquationReveal>
+
+  <template #full>
+    <div class="text-15px">
+
+  $$
+  \begin{aligned}
+  \frac{\mathrm{d} d_A}{\mathrm{d} z} &= - \frac{\hat{\theta}}{2(1+z)^2 E_o\mathcal{H}} d_A \\
+  \frac{\mathrm{d}^2 d_A}{\mathrm{d} z^2} &= \frac{d_A}{2(1+z)^4 E_o^2 \mathcal{H}^2} \bigg[2{\hat{\theta}} E_o \mathcal{H}(1+z) - 2{\lvert\hat{\sigma}\rvert^2} - k^\mu k^\nu {R_{\mu\nu}} - \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda}  \bigg] \\
+  \frac{\mathrm{d}^3 d_A}{\mathrm{d} z^3} &= \frac{d_A}{2(1+z)^6 E_o^3 \mathcal{H}^3} \bigg[
+      6\bigg(2 E_o \mathcal{H}{\lvert\hat{\sigma}\rvert^2} + E_o \mathcal{H} k^\mu k^\nu R_{\mu\nu} + E_o {\hat{\theta}} \frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg) (1+z) - 6 E_o^2 \mathcal{H}^2 {\hat{\theta}} (1+z)^2 -3 {\hat{\theta}} {\lvert\hat{\sigma}\rvert^2} \\
+      &\quad- \frac{3}{\mathcal{H}}\bigg({2{\lvert\hat{\sigma}\rvert^2}} + {k^\mu k^\nu R_{\mu\nu}}\bigg)\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} - \frac{3{\hat{\theta}}}{\mathcal{H}^2}\bigg(\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg)^2 + \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d}^2 \mathcal{H}}{\mathrm{d} \lambda^2} - 2 k^\alpha k^\beta C_{\rho\alpha\sigma\beta} \hat{\sigma}^{\rho\sigma} + \frac{\hat{\theta} k^\mu k^\nu R_{\mu\nu}}{2} + \frac{\mathrm{d} (k^\mu k^\nu R_{\mu\nu})}{\mathrm{d} \lambda} \bigg]
+  \end{aligned}
+  $$
+  </div>
+  </template>
+
+
+  <template #step1>
+    <div class="text-15px">
+
+  $$
+  \begin{aligned}
+  \frac{\mathrm{d} d_A}{\mathrm{d} z} &= - \frac{\hat{\theta}}{2(1+z)^2 E_o\mathcal{H}} d_A \\
+  \phantom{\frac{\mathrm{d}^2 d_A}{\mathrm{d} z^2}} &\phantom{= \frac{d_A}{2(1+z)^4 E_o^2 \mathcal{H}^2} \bigg[2{\hat{\theta}} E_o \mathcal{H}(1+z) - 2{\lvert\hat{\sigma}\rvert^2} - k^\mu k^\nu {R_{\mu\nu}} - \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda}  \bigg]} \\
+  \phantom{\frac{\mathrm{d}^3 d_A}{\mathrm{d} z^3}} &\phantom{= \frac{d_A}{2(1+z)^6 E_o^3 \mathcal{H}^3} \bigg[ 6\bigg(2 E_o \mathcal{H}{\lvert\hat{\sigma}\rvert^2} + E_o \mathcal{H} k^\mu k^\nu R_{\mu\nu} + E_o {\hat{\theta}} \frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg) (1+z) - 6 E_o^2 \mathcal{H}^2 {\hat{\theta}} (1+z)^2 -3 {\hat{\theta}} {\lvert\hat{\sigma}\rvert^2} } \\
+  &\phantom{\quad- \frac{3}{\mathcal{H}}\bigg({2{\lvert\hat{\sigma}\rvert^2}} + {k^\mu k^\nu R_{\mu\nu}}\bigg)\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} - \frac{3{\hat{\theta}}}{\mathcal{H}^2}\bigg(\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg)^2 + \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d}^2 \mathcal{H}}{\mathrm{d} \lambda^2} - 2 k^\alpha k^\beta C_{\rho\alpha\sigma\beta} \hat{\sigma}^{\rho\sigma} + \frac{\hat{\theta} k^\mu k^\nu R_{\mu\nu}}{2} + \frac{\mathrm{d} (k^\mu k^\nu R_{\mu\nu})}{\mathrm{d} \lambda} \bigg]}
+  \end{aligned}
+  $$
+  </div>
+  </template>
+
+
+  <template #step2>
+    <div class="text-15px">
+
+  $$
+  \begin{aligned}
+  \frac{\mathrm{d} d_A}{\mathrm{d} z} &= - \frac{\hat{\theta}}{2(1+z)^2 E_o\mathcal{H}} d_A \\
+  \frac{\mathrm{d}^2 d_A}{\mathrm{d} z^2} &= \frac{d_A}{2(1+z)^4 E_o^2 \mathcal{H}^2} \bigg[2{\hat{\theta}} E_o \mathcal{H}(1+z) - 2{\lvert\hat{\sigma}\rvert^2} - k^\mu k^\nu {R_{\mu\nu}} - \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda}  \bigg] \\
+  \phantom{\frac{\mathrm{d}^3 d_A}{\mathrm{d} z^3}} &\phantom{= \frac{d_A}{2(1+z)^6 E_o^3 \mathcal{H}^3} \bigg[ 6\bigg(2 E_o \mathcal{H}{\lvert\hat{\sigma}\rvert^2} + E_o \mathcal{H} k^\mu k^\nu R_{\mu\nu} + E_o {\hat{\theta}} \frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg) (1+z) - 6 E_o^2 \mathcal{H}^2 {\hat{\theta}} (1+z)^2 -3 {\hat{\theta}} {\lvert\hat{\sigma}\rvert^2} } \\
+  &\phantom{\quad- \frac{3}{\mathcal{H}}\bigg({2{\lvert\hat{\sigma}\rvert^2}} + {k^\mu k^\nu R_{\mu\nu}}\bigg)\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} - \frac{3{\hat{\theta}}}{\mathcal{H}^2}\bigg(\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg)^2 + \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d}^2 \mathcal{H}}{\mathrm{d} \lambda^2} - 2 k^\alpha k^\beta C_{\rho\alpha\sigma\beta} \hat{\sigma}^{\rho\sigma} + \frac{\hat{\theta} k^\mu k^\nu R_{\mu\nu}}{2} + \frac{\mathrm{d} (k^\mu k^\nu R_{\mu\nu})}{\mathrm{d} \lambda} \bigg]}
+  \end{aligned}
+  $$
+  </div>
+  </template>
+
+
+  <template #step3>
+    <div class="text-15px">
+
+  $$
+  \begin{aligned}
+  \frac{\mathrm{d} d_A}{\mathrm{d} z} &= - \frac{\hat{\theta}}{2(1+z)^2 E_o\mathcal{H}} d_A \\
+  \frac{\mathrm{d}^2 d_A}{\mathrm{d} z^2} &= \frac{d_A}{2(1+z)^4 E_o^2 \mathcal{H}^2} \bigg[2{\hat{\theta}} E_o \mathcal{H}(1+z) - 2{\lvert\hat{\sigma}\rvert^2} - k^\mu k^\nu {R_{\mu\nu}} - \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda}  \bigg] \\
+  \frac{\mathrm{d}^3 d_A}{\mathrm{d} z^3} &= \frac{d_A}{2(1+z)^6 E_o^3 \mathcal{H}^3} \bigg[
+      6\bigg(2 E_o \mathcal{H}{\lvert\hat{\sigma}\rvert^2} + E_o \mathcal{H} k^\mu k^\nu R_{\mu\nu} + E_o {\hat{\theta}} \frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg) (1+z) - 6 E_o^2 \mathcal{H}^2 {\hat{\theta}} (1+z)^2 -3 {\hat{\theta}} {\lvert\hat{\sigma}\rvert^2} \\
+      &\quad- \frac{3}{\mathcal{H}}\bigg({2{\lvert\hat{\sigma}\rvert^2}} + {k^\mu k^\nu R_{\mu\nu}}\bigg)\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} - \frac{3{\hat{\theta}}}{\mathcal{H}^2}\bigg(\frac{\mathrm{d} \mathcal{H}}{\mathrm{d} \lambda} \bigg)^2 + \frac{\hat{\theta}}{\mathcal{H}}\frac{\mathrm{d}^2 \mathcal{H}}{\mathrm{d} \lambda^2} - 2 k^\alpha k^\beta C_{\rho\alpha\sigma\beta} \hat{\sigma}^{\rho\sigma} + \frac{\hat{\theta} k^\mu k^\nu R_{\mu\nu}}{2} + \frac{\mathrm{d} (k^\mu k^\nu R_{\mu\nu})}{\mathrm{d} \lambda} \bigg]
+  \end{aligned}
+  $$
+  </div>
+  </template>
+
+</EquationReveal>
+
 
 </div>
 
-</v-click>
 
-<v-click>
+<v-click at="4">
 
 Constructing a third-order Taylor expansion around $z_*$:
 
@@ -741,6 +832,7 @@ First: Negative -> contributes to smaller d_A
 Second and third: both begative, both negligible (required much matter)
 Fourth: Initially negative (minus, theta minus and negative differential as H decreases with \lambda (increases with z) on slope towards centre), positive from centre of void, flips dramatically to negative at overdensity due to derivative chaning sign again. Zero in background due to derivative being zero.
 -->
+
 
 ---
 level: 2
