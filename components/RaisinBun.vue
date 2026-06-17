@@ -30,9 +30,9 @@ const raisins = [
 ]
 
 const pieData = [
-  { value: 0.050, color: '#2ea381', label: 'SM' },
-  { value: 0.265, color: '#4287DE', label: 'DM' },
-  { value: 0.685, color: '#a45cb8', label: 'DE' }
+  { value: 0.05, color: '#2ea381', label: 'SM' },
+  { value: 0.26, color: '#4287DE', label: 'DM' },
+  { value: 0.69, color: '#a45cb8', label: 'DE' }
 ]
 
 function step(now) {
