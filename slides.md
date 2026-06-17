@@ -1174,23 +1174,17 @@ transition: fade
 
 # Summary
 
+<GradientBox width="w-full">
+
+* Backreaction effects occured in the Simsilun simulations
 <v-clicks>
 
-* Backreaction effects in Simsilun simulations
-
-* Neural networks predicted the effects well
-
-* Many low-resolution simulations better than few high-resolution
-
-* Cosmography around arbitrary expansion points is useful
-
-* Large density contrasts prove a challenge
-
+* CNNs predict the effects well, especially using many low-resolution simulations
+* Cosmography with arbitrary $z$ is useful, large density gradients prove a challenge
 * Can be used to determine the local effective Hubble parameter
-
-* Further work required to determine the relativistic effects in inhomogeneous cosmology
-
+* More work required to determine relativistic effects in inhomogeneous cosmology
 </v-clicks>
+</GradientBox>
 
 <!--
 * We see backreaction effects in the Simsilun universes, and can predict these using CNNs. Works best with a large amount of low-res universes.
