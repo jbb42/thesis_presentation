@@ -12,7 +12,7 @@ const MAX_RADIUS = 190
 
 const t = ref(0)
 const scale = ref(1)
-const isFinished = ref(false) // ← Track if animation has finished
+const isFinished = ref(false)
 
 let rafId = null
 let last = 0
@@ -29,7 +29,6 @@ const raisins = [
   [0, 0]
 ]
 
-// Added labels to the mock data
 const pieData = [
   { value: 0.050, color: '#2ea381', label: 'SM' },
   { value: 0.265, color: '#4287DE', label: 'DM' },
@@ -45,7 +44,7 @@ function step(now) {
   
   if (BASE_RADIUS * nextScale >= MAX_RADIUS) {
     scale.value = MAX_RADIUS / BASE_RADIUS
-    isFinished.value = true // ← Animation complete, trigger pie chart
+    isFinished.value = true
     return
   }
   
@@ -59,7 +58,7 @@ function reset() {
   t.value = 0
   scale.value = 1
   started = false
-  isFinished.value = false // ← Reset status
+  isFinished.value = false
 }
 
 function start() {
@@ -94,7 +93,6 @@ const transformedRaisins = computed(() =>
   }))
 )
 
-// Computed property to calculate SVG paths for the pie slices and label positions
 const pieSlices = computed(() => {
   let accumulatedAngle = 0
   
@@ -103,16 +101,13 @@ const pieSlices = computed(() => {
     const endAngle = accumulatedAngle + slice.value * 2 * Math.PI
     accumulatedAngle = endAngle
 
-    // Calculate start and end coordinates on the circle perimeter
     const x1 = cx + MAX_RADIUS * Math.sin(startAngle)
     const y1 = cy - MAX_RADIUS * Math.cos(startAngle)
     const x2 = cx + MAX_RADIUS * Math.sin(endAngle)
     const y2 = cy - MAX_RADIUS * Math.cos(endAngle)
 
-    // Flag for arcs greater than 180 degrees
     const largeArcFlag = slice.value > 0.5 ? 1 : 0
 
-    // Construct SVG Path commands
     const pathData = `
       M ${cx} ${cy}
       L ${x1} ${y1}
@@ -120,22 +115,26 @@ const pieSlices = computed(() => {
       Z
     `
 
-    // --- NEW: Calculate Label Coordinates ---
-    // Find the angle exactly halfway through this slice
     const midAngle = startAngle + (slice.value * Math.PI) 
     
-    // Set how far out from the center the label should sit (65% of max radius)
-    const labelRadius = MAX_RADIUS * 0.65 
+    // NARROW SLICE FIX: If a slice is under 10%, push the text further outward
+    // so it doesn't get squished or bleed into other slices near the center.
+    const isNarrow = slice.value < 0.1
+    const labelRadius = MAX_RADIUS * (isNarrow ? 0.82 : 0.60) 
     
     const labelX = cx + labelRadius * Math.sin(midAngle)
     const labelY = cy - labelRadius * Math.cos(midAngle)
+
+    const percentage = parseFloat((slice.value * 100).toFixed(1)) + '%'
 
     return {
       d: pathData,
       color: slice.color,
       label: slice.label,
+      percentage,
       labelX,
-      labelY
+      labelY,
+      fontSize: isNarrow ? '20' : '20' // Scale down font slightly if narrow
     }
   })
 })
@@ -149,19 +148,24 @@ const pieSlices = computed(() => {
           <path 
             :d="slice.d" 
             :fill="slice.color"
-            stroke="#fff"
-            stroke-width="1"
+            stroke="#ffffff"
+            stroke-width="2"
           />
           <text
             :x="slice.labelX"
             :y="slice.labelY"
             fill="#ffffff"
-            font-size="6"
+            :font-size="slice.fontSize"
             font-family="sans-serif"
+            font-weight="bold"
             text-anchor="middle"
             dominant-baseline="middle"
+            style="text-shadow: 1px 1px 2px rgba(0,0,0,0.4);"
           >
-            {{ slice.label }}
+            <tspan :x="slice.labelX" dy="-0.4em">{{ slice.label }}</tspan>
+            <tspan :x="slice.labelX" dy="1.2em" font-weight="normal" opacity="0.9">
+              {{ slice.percentage }}
+            </tspan>
           </text>
         </g>
       </g>

@@ -206,7 +206,7 @@ function drawPlotOnRoad() {
   const stepX = canvas.width / totalPoints
 
   ctx.lineWidth = 3
-  ctx.strokeStyle = 'rgba(170, 85, 204, 0.8)' 
+  ctx.strokeStyle = 'rgba(63, 108, 110, 0.8)' 
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
   ctx.beginPath()
@@ -328,7 +328,7 @@ onBeforeUnmount(() => {
   position: absolute;
   bottom: 6px;
   left: 64px; 
-  color: rgba(10, 10, 10, 0.6);
+  color: rgb(63, 108, 110);
   font-size: 24px;
   font-weight: bold;
   pointer-events: none;

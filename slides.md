@@ -139,7 +139,7 @@ $$ \mathrm{d} s^2 = -\mathrm{d} t^2 + a(t)^2 \bigg( \frac{1}{1-kr^2} \mathrm{d} 
 Friedmann equations describe the dynamics of the Universe
 
 $$ \begin{aligned}
-\frac{\dot{a}^2}{a^2} &\equiv H^2 = \frac{\kappa}{3} \rho - \frac{k}{a^2} + \frac{\Lambda}{3} \\
+\bigg(\frac{\dot{a}}{a}\bigg)^2 &\equiv H^2 = \frac{\kappa}{3} \rho - \frac{k}{a^2} + \frac{\Lambda}{3} \\
 \frac{\ddot{a}}{a} &= -\frac{\kappa}{6} (\rho+3p) + \frac{\Lambda}{3} 
 \end{aligned}
 $$
@@ -185,7 +185,7 @@ Large-scale effects from small-scale inhomogeneities?
 <v-click>
 $$
 \begin{aligned}
-    3\frac{\dot{a}_\mathcal{D}^2}{a_\mathcal{D}^2} &= 3H_\mathcal{D}^2 = {\color{CadetBlue}- \frac{1}{2} \langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}} + \kappa \langle\rho\rangle_\mathcal{D} + \Lambda - {\color{CadetBlue}\frac{1}{2} Q_\mathcal{D}}\\
+    3\bigg(\frac{\dot{a}_\mathcal{D}}{a_\mathcal{D}}\bigg)^2 &= 3H_\mathcal{D}^2 = {\color{CadetBlue}- \frac{1}{2} \langle{}^{(3)}\mathcal{R}\rangle_\mathcal{D}} + \kappa \langle\rho\rangle_\mathcal{D} + \Lambda - {\color{CadetBlue}\frac{1}{2} Q_\mathcal{D}}\\
     3\frac{\ddot{a}_\mathcal{D}}{a_\mathcal{D}} &= {\color{CadetBlue}Q_\mathcal{D}} - \frac{\kappa}{2}\langle \rho \rangle_\mathcal{D} + \Lambda\\
     Q_\mathcal{D} &= \frac{2}{3}\big(\langle \Theta^2 \rangle_\mathcal{D} - \langle \Theta \rangle_\mathcal{D}^2\big)  - 2\langle \sigma^2 \rangle_\mathcal{D}
 \end{aligned}
@@ -200,14 +200,8 @@ Cosmological accelerated expansion without local acceleration!
 
 <v-click>
 <div class="flex justify-center items-center gap-8 text-xl">
-  <div class="text-blue-500">
-    <span class="font-bold">Blue team (voids):</span> 20 km/h
-  </div>
-  
-  
-  <div class="text-red-500">
-    <span class="font-bold">Red team (overdensities):</span> 10 km/h
-  </div>
+    <span color="#3B88C3">Blue team (voids): 20 km/h</span> 
+    <span color="#DD2E44">Red team (overdensities): 10 km/h</span>
 </div>
   <CyclistRace />
 </v-click>
@@ -932,16 +926,6 @@ Constructing a third-order Taylor expansion around $z_*$:
 $$d_A(z) \approx d_A(z_*) + d'_A(z_*)(z-z_*) + \frac{1}{2} d_A''(z_*)(z-z_*)^2 + \frac{1}{6}d_A'''(z_*)(z-z_*)^3$$
 
 </v-click>
-
-<!--
-* We then do cosmographic expansion of $d_A$.
-* Use relation between affine parameter $\lambda$ and redshift $z$, along with definition of $d_A$ in terms of ray bundle expansion
-* First order term: Actually positive, since rays are converging, meaning $\hat{\theta}$ is negative.
-* Second order terms:
-  * First: Similar to above, but negative --> contributes to smaller d_A
-Second and third: both begative, both negligible (required much matter)
-Fourth: Initially negative (minus, theta minus and negative differential as H decreases with \lambda (increases with z) on slope towards centre), positive from centre of void, flips dramatically to negative at overdensity due to derivative chaning sign again. Zero in background due to derivative being zero.
--->
 
 <!--
 * We then do cosmographic expansion of $d_A$.
