@@ -1175,13 +1175,16 @@ transition: fade
 # Summary
 
 <GradientBox width="w-full">
+<v-clicks at="0">
 
-* Backreaction effects occured in the Simsilun simulations
-<v-clicks>
+* Backreaction effects occur in the Simsilun simulations
 
-* CNNs predict the effects well, especially using many low-resolution simulations
-* Cosmography with arbitrary $z$ is useful, large density gradients prove a challenge
-* Can be used to determine the local effective Hubble parameter
+* CNNs predict these effects well, especially using many low-resolution simulations
+
+* Cosmography at arbitrary $z$ is useful, but large density gradients prove a challenge
+
+* The method can be used to infer the local effective Hubble parameter
+
 * More work required to determine relativistic effects in inhomogeneous cosmology
 </v-clicks>
 </GradientBox>
