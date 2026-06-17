@@ -71,7 +71,7 @@ transition: fade
 * Compare to ray tracing results in LTB models
 </GradientBox>
 
-<div class="absolute right-10 top-7 w-66">
+<div class="absolute right-10 top-5 w-66">
   <Toc text :columns="1" minDepth="1" maxDepth="2" />
 </div>
 
