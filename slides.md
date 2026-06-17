@@ -50,9 +50,8 @@ Examining the inhomogeneous universe through simulations, machine learning, and 
 
 </div>
 
-
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+Thank you all for coming, especially thanks to my supervisor Sofie for great help and guidance.
 -->
 
 ---
@@ -97,6 +96,13 @@ transition: fade
 }
 </style>
 
+<!--
+* We will examine relativistic effects of inhomogeneities in two ways:
+* First we will look at global effects of the universe, seeing how it contribute to curvature and accelerated expansion.
+* This is done through simulations, with CNNs then employed as a proof-of-concept of how to extract values from observations.
+* In the second part, we look at how local observations are affected by inhomogeneitites. To do that, we use cosmograpy, which is a method to extract comsological parameters from observables without assuming an underlying model. We do this by comparing exact ray-tracing results to a cosmographic expansion.
+* We will start with a brief theoretical introduction to inhomogeneous cosmology:
+-->
 
 ---
 level: 1
@@ -105,7 +111,9 @@ layout: section
 
 # Inhomogeneous Cosmology
 
-
+<!--
+First, I will go through our standard model of the universe, then i will break the assumption of homogeneity to obtain Buchert and LTB
+-->
 
 ---
 level: 2
@@ -147,6 +155,17 @@ Flat universe with accelerating expansion --- $\Lambda$CDM model
   <RaisinBun />
 </v-click>
 
+<!--
+* Modern cosmology is based on general relativity.
+* Curvature = matter-energy
+* Hard to solve by putting everything into RHS, we need to make assumption
+* Homo-iso is the simplest assumption we can make, but works remarkably well
+* FLRW metric with scale factor (expansion/contraction) and GLOBAL curvature
+* By solving Einstein eq for this metric, we get Friedmann. Describes dynamics of universe.
+* What we observe is a flat universe where everything moves away from us faster and faster (accelerated expansion, raisin bun).
+* Our current best model of the universe is the LCDM model, which plugs 5% standard model matter, 26% DM and 69% DE (cosmological constant) into the FLRW model.
+* Works well, but is slightly wrong.
+-->
 
 ---
 level: 2
@@ -193,6 +212,15 @@ Cosmological accelerated expansion without local acceleration!
   <CyclistRace />
 </v-click>
 
+<!--
+* We see that spatial averages and time derivatives do not commute.
+* This means that what we did before wasn't entirely correct.
+* We instead average local equations over a domain, to take effect into account.
+* Gives the Buchert equations, Friedmann with replaced curvature term and new kinematical backreaction.
+* Q depends on the variance of the expansion and the shear -- we can get global accelerated expansion without any local region accelerating.
+* Confused? We look at a simple example of two teams of cyclists. Rules: double every ten kilometers. Blue is faster, doubles more often than red, increases average velocity.
+* Blue are actually cosmic voids, red are overdense regions
+-->
 
 ---
 level: 2
@@ -247,6 +275,15 @@ Difficult to produce significant backreaction <ArXiv id="1308.6731" />
   </div>
 </div>
 
+<!--
+* We will look at a way to model these effects.
+* Introducing Lemaitre--Tolman--Bondi metric.
+* Resembles FLRW due to spherical symmetry, but a is replaced by areal radius A, which has an r dependence. Curvature is also r dependent now.
+* By varying the curvature function, we can model different universes. We use a very typical void compensated by an overdensity, and an overdensity.
+* We can calculate parameters from solving this model, including expansion and shear, hence backreaction!
+* Turns out, not that much backreaction even when taking LTB to its TARDIS limits (Lavinto, Räsänen, and Szybka)
+-->
+
 ---
 level: 1
 layout: section
@@ -254,6 +291,11 @@ layout: section
 
 # Simplified Silent Universes
 
+<!--
+We thus choose another approach, namely cosmological simulations based on the simplified silent universe approximations.
+
+We will train a neural network from these as a proof of concept of how to extract effects from observations
+-->
 
 ---
 level: 2
@@ -302,6 +344,16 @@ Solve for each cell to simulate universes
 
 </v-click>
 
+<!--
+* First, we discuss what a cosmological simulation is.
+*  Always an approximation of the universe
+* N-body are really good at structures like galaxies and clusters. Typically Newtonian, and often required periodic boundary conditions. These limit the curvature and hence backreaction due to the torus geometry and the integrability condition.
+* We thus use another scheme, the simplified silent universe, which is a relativistic numerical simulation without periodic boundary conditions.
+* The cost we pay instead is the silent universe: no long range interaction, with irrotational, pressureless dust and vanishing magnetic Weyl.
+* We get coupled dynamic equations for density, expansion rate, shear, Weyl curvature and volume.
+* No spatial derivatives, thus we can simulate regions independently.
+* We can simulate the universe on a grid by evolving each cell
+-->
 
 ---
 level: 3
@@ -371,7 +423,16 @@ $\delta_i$ generated with CLASS <ArXiv id="1104.2933"/>
 }
 </style>
 
-
+<!--
+* To simulate we need initial conditions to start with
+* Based on perturbation theory linear in density contrast $\delta$
+* To test these against a known model, we compare to LTB
+* Initial, perturbed, exact final, silun, simsilun
+* $\rho$ of course has perfect initial conditoons per definition. Silun very good, Simsilun not so. $Theta$ similar
+* $\Sigma$ not so good. Initial conditions deviate significantly, due to flat but non-background void (absolute vs gradient). Same with Weyl.
+* Corrupts the entire simulation. Not good, but how bad? Mostly bad for structures spanning many cells, which our structures do not.
+* We proceed to generate $\delta_i$ by making CLASS powerspectrum and using inverse Fourier create Gaussian random field.
+-->
 
 ---
 level: 2
@@ -433,6 +494,14 @@ Simulating universes numerically by solving Simsilun ODEs until $H_\mathrm{bg}=H
 }
 </style>
 
+<!--
+* We then simulate universes until background $(\delta=0)$ Hubble parameter equals measured Hubble constant.
+* Even in comoving coordinates, we see matter clumping resembling our universe with voids and small clumps of matter in between.
+* We perform a large number of simulations in intervals around our best estimates of density/Hubble parameters. More low-res universes due to computational cost.
+* We see backreaction effects in N=64. Look at top of cornerplot. Numbers are smaller for m and L, larger for k. We get more curvature, and also some Q, and h changes.
+* Mostly similar for N=128. Slightly larger effects due to less smoothening, but also more sparse due to less simulations
+-->
+
 ---
 level: 2
 transition: view-transition
@@ -470,6 +539,13 @@ Training for up to 250 epochs with early stopping after 20
 
 </v-click>
 
+<!--
+* We then move on to training a CNN to predict density parameters and Hubble parameter, both initial and final, from final density map (somewhat resembling what we see today).
+* We train three versions. Low-res, high-res, control
+* All use same network and hyperparameters. Extra input layer to downscale N=128 data.
+* Split into training, validation and test data. Equal number of each kind of universe.
+* Train for up to 250 epochs, usually a lot shorter due to early stopping after 20 epochs without improvement.
+-->
 
 ---
 level: 3
@@ -484,6 +560,13 @@ Convolutional neural network architecture
   <img src="/cnn_dark.svg" class="w-full mx-auto hidden dark:block" alt="CNN Architecture Dark" />
 </div>
 
+<!--
+* Structure of the network. Input is 3d-density cube (drawing shows only 2d)
+* Four convolutional blocks, consisting of convolution (trains filters to recognise structures), batch normalisation (for stability), and max-pooling (for downscaling)
+* After downscaling we reduce to 128 values by global average pooling the remaining spatial
+* Fully connected layer (like perceptron) connected to output layer (with dropout to decrease overfitting)
+* Takes "observation" as input, outputs density parameters and Hubble parameter at both initial and final time.
+-->
 
 ---
 level: 3
@@ -654,12 +737,27 @@ More work needed for observations
 }
 </style>
 
+<!--
+* What do we then see? Very accurate predictions for CNN1, both initial and final.
+* Less good for CNN2, especially final.
+* Actually better for CNN3. Surprising, CNN2 should be at least as good.
+* Loss part of explanation. CNN1 and CNN3 flatten, CNN2 does not.
+* All in all, I demonstrate it works as proof of concept.
+* We cannot yet use simulations directly with our network.
+-->
+
 ---
 level: 1
 layout: section
 ---
 
 # Cosmography
+
+<!--
+We have now seen how to obtain global backreaction effects.
+
+We will proceed to what we can learn about the inhomogeneous universe from local observations.
+-->
 
 ---
 level: 2
@@ -693,6 +791,14 @@ Exploring the inhomogeneous universe from observations
 
 </v-click>
 
+<!--
+* Imhomogeneities change global dynamics of the Universe through backreaction.
+* But how do inhomogeneitites change what we locally observe?
+* To look at that, we would like to introduce a framework that does not rely on an underlying model. Thus no LTB og slient universe, only what we can learn directly from observations.
+* We look at lensing and kinematical effects on observation, not at global effects like backreaction.
+* To do that, we perform a cosmographic expansion of an observable parameter. We do that in form of Taylor expanding the angular diameter distance around the redshift z.
+-->
+
 ---
 level: 3
 transition: view-transition
@@ -725,6 +831,16 @@ $$\mathbf{R} = -\frac{1}{2}R_{\mu\nu} k^\mu k^\nu\,,\quad
 The linear relation $\xi^a = D^a_b \dot{\xi}_0^b$ yields the Jacobi equation $\ddot{D}^a_b = T^a_c D^c_b$, from which we define:
 $$d_A = \sqrt{\lvert\det{D}\rvert}$$
 </v-click>
+
+<!--
+* Before making the cosmographic expansion, we start with exact ray tracing
+* To do this, we look at geodesic equation and transport equation (geodesic deviation equation) for light rays.
+* Path travelled, and how light bundle behaves.
+* We can define an optical tidal matrix to describe the focusing and shear of light ray bundle.
+* Depends on Ricci (density) and Weyl (tidal effects) respectively.
+* By using the linearity of the deviation vector, we can write it in terms of a Jacobian D. We can obtain this Jacobian through its second derivative.
+* This yields the angular diameter distance. Essentially from area and solid angle.
+-->
 
 ---
 level: 3
@@ -817,15 +933,27 @@ $$d_A(z) \approx d_A(z_*) + d'_A(z_*)(z-z_*) + \frac{1}{2} d_A''(z_*)(z-z_*)^2 +
 
 </v-click>
 
-
 <!--
-First order term: Actually positive, since rays are converging, meaning θ is negative.
-Second order terms:
-First: Negative -> contributes to smaller d_A
+* We then do cosmographic expansion of $d_A$.
+* Use relation between affine parameter $\lambda$ and redshift $z$, along with definition of $d_A$ in terms of ray bundle expansion
+* First order term: Actually positive, since rays are converging, meaning $\hat{\theta}$ is negative.
+* Second order terms:
+  * First: Similar to above, but negative --> contributes to smaller d_A
 Second and third: both begative, both negligible (required much matter)
 Fourth: Initially negative (minus, theta minus and negative differential as H decreases with \lambda (increases with z) on slope towards centre), positive from centre of void, flips dramatically to negative at overdensity due to derivative chaning sign again. Zero in background due to derivative being zero.
 -->
 
+<!--
+* We then do cosmographic expansion of $d_A$.
+* Use relation between affine parameter $\lambda$ and redshift $z$, along with definition of $d_A$ in terms of ray bundle expansion
+* First order term: Actually positive, since rays are converging, meaning $\hat{\theta}$ is negative.
+* Second order terms:
+  * First: Similar to above, but negative -> contributes to smaller d_A
+  * Second and third: both begative, both negligible (required much matter). Traditional view of lensing
+  * Fourth: Initially negative (minus, theta minus and negative differential as H decreases with \lambda (increases with z) on slope towards centre), positive from centre of void, flips dramatically to negative at overdensity due to derivative chaning sign again. Zero in background due to derivative being zero.
+* Third order contains combinations and derivatives of these. We won't go through it but will use it.
+* We make a Taylor expansion to third order to approximate the angular diameter distance by expanding around arbitrary redshift.
+-->
 
 ---
 level: 2
@@ -860,6 +988,13 @@ transition: slide-left
   </div>
 </div>
 
+<!--
+* To examine the expansion, we start by looking at a fiducial ray -- a well-chosen light ray in a random direction.
+* We place an observer close to large density gradients in each model. RHS plot shows what they see along line of sight.
+* Looking at expansion vs exact ray-traced ray, we see why it is relevant to expand around arbitrary z. z=0 diverges quickly.
+* Expansion around large density contrasts even worse. Not a problem in LTB2.
+* The terms in the second order term shows that only first and last term contribute significantly. Too little matter to get significant Ricci lensing, but important kinematical effects, especially last term.
+-->
 
 ---
 level: 2
@@ -902,7 +1037,12 @@ Comparing exact $d_A$ and derivatives to FLRW counterparts
   </div>
 </template>
 
-
+<!--
+* Centre is from position and radially inwards towards the centre of the void (overdensity). At second redshift we therefore see a ring of light rays still coming from inside the void (overdensity) being smaller (larger) than FLRW.
+* What we should notice here: higher order derivatives grow in magnitude, making LTB1 not converge.
+* LTB1 is primarily bad around the large density contrasts, seen by the rings.
+* LTB2 is more well-behaved due to less density contrast.
+-->
 
 ---
 level: 3
@@ -946,6 +1086,15 @@ Accuracy of different expansion orders evaluated at $z = 0.010$ and $z = 0.002$
   </div>
 </template>
 
+<!--
+* Looking at the error at a specific redshift, by comparing expansion at different orders to ray-tracing results
+* Zeroth order at $z_*=0$ is zero, so only numerical error shown there.
+* What we expect: higher order -> improve, redshift closer to eval _> improve.
+* We see that for LTB2
+* LTB1 gets worse, but again in a narrow ring, actually gets better in most directions.
+* When all rays come from outside, we do not have a problem with sharp density contrasts.
+-->
+
 ---
 level: 3
 transition: fade
@@ -974,6 +1123,15 @@ Error using multiple expansion points
   
 </div>
 
+<!--
+* As a last test, we combine expansions around multiple points.
+* Blue line shows mean error of skymap, red/green standard deviation (due to anisotropy).
+* We expect error to become smaller with more expansion points.
+* True for LTB2, not exactly true for LTB1.
+* Around first ray from outside and last ray from inside, so "uncompensated" extremes.
+* We could consider using a rolling mean.
+-->
+
 ---
 level: 1
 layout: section
@@ -982,6 +1140,9 @@ transition: view-transition
 
 # Conclusions
 
+<!--
+We have now seen both global and local effects. We will now proceed onto what could be done in the future, and summarise our findings.
+-->
 
 ---
 level: 2
@@ -1012,6 +1173,16 @@ transition: slide-left
 
 </div>
 
+<!--
+* We are not done here. To actually use the results in the future, we have to make some improvements.
+* For simsilun, we first of all need more accurate simulations. Simsilun is a toy model, and is good for small experiments, but to actually compare to observations, we need a more realistic relativistic simulation framework.
+* We also need to prepare our simulation to produce maps that resemble actual observational data, or alternatively make some preprocessing of observational data, to train our networks to predict real data. With this, we can use CNNs as an interesting first step in how to infer backreaction effects in our universe.
+* For the cosmographic expansion, we saw problematic effects from large density gradients. We could use a rolling mean or another type of expansion to mitigate these.
+* To use the expansion to predict parameters by fitting, we can look at which terms are negligible also in more complex model, to reduce amount of free parameters.
+* When method is improved and we get extensive amounts of new data, we can test our method on the data and try to infer parameters like local effective Hubble parameter.
+* All in all, it makes sense for further look into aspects of inhomogeneous cosmology, as it has both local and global effects we should not ignore.
+-->
+
 ---
 level: 2
 transition: fade
@@ -1037,6 +1208,11 @@ transition: fade
 
 </v-clicks>
 
+<!--
+* We see backreaction effects in the Simsilun universes, and can predict these using CNNs. Works best with a large amount of low-res universes.
+* We proved the usefulness of doing cosmographic expansions around arbitrary points, but also shows how large density contrasts proves a challenge. It does, however, show a possible method for determining local effective Hubble parameter at different redshifts and locations in the sky.
+* We are not done here, further work is required to determine the relativistic effects in inhomogeneous cosmology.
+-->
 
 ---
 layout: end
@@ -1044,3 +1220,9 @@ level: 3
 ---
 
 # Thank you for listening! Questions?
+
+<!--
+(Smil, bliv stående, lign en vinder)
+
+Og gå tilbage til summary!
+-->
